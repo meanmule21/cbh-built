@@ -1,11 +1,11 @@
 "use client";
 
-import { useOrder } from "../order/context/OrderContext";
+import { useOrderSafe } from "../order/context/OrderContext";
 import { useRouter } from "next/navigation";
 
 export default function CartIconButton() {
-  const { getTotalHatCount } = useOrder();
-  const totalItems = getTotalHatCount();
+  const orderContext = useOrderSafe();
+  const totalItems = orderContext?.getTotalHatCount() ?? 0;
   const router = useRouter();
 
   const handleClick = () => {

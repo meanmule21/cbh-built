@@ -230,3 +230,8 @@ export function useOrder() {
   }
   return context;
 }
+
+// Safe version that returns null instead of throwing - for components that may render outside provider
+export function useOrderSafe() {
+  return useContext(OrderContext);
+}
