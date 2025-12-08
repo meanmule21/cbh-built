@@ -1,14 +1,6 @@
-import { Metadata } from "next";
-import { OrderProvider } from "../order/context/OrderContext";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Reorder Custom Hats",
-  description: "Returning customer? Reorder your custom embroidered hats with the same logo. Quick and easy reordering process.",
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+import { OrderProvider } from "../order/context/OrderContext";
 
 export default function ReorderLayout({
   children,
