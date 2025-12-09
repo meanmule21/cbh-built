@@ -93,7 +93,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ qty: null, inventory: {}, error: "API not configured" });
   }
 
-  const searchParams = request.nextUrl.searchParams;
   const styleIDParam = searchParams.get("styleID");
   const model = searchParams.get("model");
   const colorCode = searchParams.get("colorCode");
