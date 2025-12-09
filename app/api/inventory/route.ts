@@ -106,7 +106,10 @@ export async function GET(request: NextRequest) {
       } else if (endpoint === "styles") {
         url = `${SS_API_BASE}/styles/?style=${testStyle}`;
       } else if (endpoint === "brand") {
-        url = `${SS_API_BASE}/products/?brand=Richardson`;
+        url = `${SS_API_BASE}/styles/?brand=Richardson`;
+      } else if (endpoint === "richardson112") {
+        // Try to find Richardson 112 specifically
+        url = `${SS_API_BASE}/styles/?brand=Richardson&styleName=112`;
       } else {
         url = `${SS_API_BASE}/inventory/?style=${testStyle}`;
       }
