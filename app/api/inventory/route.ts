@@ -105,11 +105,15 @@ export async function GET(request: NextRequest) {
         url = `${SS_API_BASE}/products/?style=${testStyle}`;
       } else if (endpoint === "styles") {
         url = `${SS_API_BASE}/styles/?style=${testStyle}`;
-      } else if (endpoint === "brand") {
-        url = `${SS_API_BASE}/styles/?brand=Richardson`;
-      } else if (endpoint === "richardson112") {
-        // Try to find Richardson 112 specifically
-        url = `${SS_API_BASE}/styles/?brand=Richardson&styleName=112`;
+      } else if (endpoint === "partnumber") {
+        // Query by part number (e.g., "112" for Richardson 112)
+        url = `${SS_API_BASE}/styles/?partnumber=${testStyle}`;
+      } else if (endpoint === "search") {
+        // Search by keyword
+        url = `${SS_API_BASE}/products/?keyword=${encodeURIComponent(testStyle)}`;
+      } else if (endpoint === "inv-partnumber") {
+        // Try inventory by part number
+        url = `${SS_API_BASE}/inventory/?partnumber=${testStyle}`;
       } else {
         url = `${SS_API_BASE}/inventory/?style=${testStyle}`;
       }
