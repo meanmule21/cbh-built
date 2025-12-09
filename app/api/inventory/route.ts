@@ -26,7 +26,9 @@ async function getStyleInventory(styleID: number): Promise<Record<string, number
   }
 
   try {
+    console.log(`Fetching inventory for styleID: ${styleID}`);
     const inventory = await fetchSSInventory({ styleID });
+    console.log(`Got ${inventory.length} inventory items for styleID ${styleID}`);
     
     // Group by color code and sum quantities across warehouses
     // Also track by full part number for flexible matching
@@ -72,10 +74,23 @@ async function getStyleInventory(styleID: number): Promise<Record<string, number
 // GET /api/inventory?styleID=4379 (by style ID)
 // or /api/inventory?model=112&colorCode=BLK (by model and color)
 // or /api/inventory?model=112 (get all colors for a model)
+// or /api/inventory?debug=true (show config status)
 export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  
+  // Debug endpoint to check configuration
+  if (searchParams.get("debug") === "true") {
+    return NextResponse.json({
+      configured: !!process.env.SSACTIVEWEAR_API_KEY,
+      hasAccountNumber: !!process.env.SSACTIVEWEAR_ACCOUNT_NUMBER,
+      accountNumberLength: process.env.SSACTIVEWEAR_ACCOUNT_NUMBER?.length || 0,
+      apiKeyLength: process.env.SSACTIVEWEAR_API_KEY?.length || 0,
+    });
+  }
+
   // Check if API is configured
   if (!process.env.SSACTIVEWEAR_API_KEY) {
-    return NextResponse.json({ qty: null, inventory: {} });
+    return NextResponse.json({ qty: null, inventory: {}, error: "API not configured" });
   }
 
   const searchParams = request.nextUrl.searchParams;
