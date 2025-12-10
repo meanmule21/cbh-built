@@ -18,7 +18,7 @@ const BRAND_ORDER = ["Richardson", "Yupoong"] as const;
 
 // Model order within each brand
 const MODEL_ORDER: Record<string, string[]> = {
-  Richardson: ["112", "112PFP", "220", "256", "258"],
+  Richardson: ["112", "112PFP", "168", "220", "256", "258"],
   Yupoong: ["6606", "6006", "6506"],
 };
 
@@ -135,6 +135,28 @@ const richardson112PFPVariants: HatVariant[] = [
   { id: "richardson-112pfp-realtree-timber-black", brand: "Richardson", model: "112PFP", name: "Richardson 112PFP", colorName: "Realtree Timber/Black", basePrice: 24, image: "/hats/richardson-112pfp/Richardson_112PFP_Realtree_Timber-_Black_Front_High.jpg", ssPartNumber: "112PFP-RTTMBLK" },
   { id: "richardson-112pfp-sable-duck-camo-black", brand: "Richardson", model: "112PFP", name: "Richardson 112PFP", colorName: "Sable Duck Camo/Black", basePrice: 24, image: "/hats/richardson-112pfp/Richardson_112PFP_Sable_Duck_Camo-_Black_Front_High.jpg", ssPartNumber: "112PFP-SBDCBLK" },
   { id: "richardson-112pfp-saltwater-duck-camo-charcoal", brand: "Richardson", model: "112PFP", name: "Richardson 112PFP", colorName: "Saltwater Duck Camo/Charcoal", basePrice: 24, image: "/hats/richardson-112pfp/Richardson_112PFP_Saltwater_Duck_Camo-_Charcoal_Front_High.jpg", ssPartNumber: "112PFP-SWDCCH" },
+];
+
+// Richardson 168 variants - images in /hats/richardson-168/
+// SS Activewear part numbers added for real-time inventory
+const richardson168Variants: HatVariant[] = [
+  { id: "richardson-168-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Black_Front_High.jpg", popular: true, ssPartNumber: "168-BLK" },
+  { id: "richardson-168-black-camo-loden", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Black/Camo/Loden", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Black-_Camo-_Loden_Front_High.jpg", ssPartNumber: "168-BLKCAMLOD" },
+  { id: "richardson-168-brown-khaki", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Brown/Khaki", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Brown-_Khaki_Front_High.jpg", ssPartNumber: "168-BRNKHI" },
+  { id: "richardson-168-caramel", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Caramel", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Caramel_Front_High.jpg", ssPartNumber: "168-CAR" },
+  { id: "richardson-168-charcoal", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Charcoal", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Charcoal_Front_High.jpg", popular: true, ssPartNumber: "168-CHAR" },
+  { id: "richardson-168-charcoal-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Charcoal/Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Charcoal-_Black_Front_High.jpg", popular: true, ssPartNumber: "168-CHBLK" },
+  { id: "richardson-168-charcoal-black-white", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Charcoal/Black/White", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Charcoal-_Black-_White_Front_High.jpg", ssPartNumber: "168-CHBLKWHT" },
+  { id: "richardson-168-charcoal-burnt-orange-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Charcoal/Burnt Orange/Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Charcoal-_Burnt_Orange-_Black_Front_High.jpg", ssPartNumber: "168-CHBORGBLK" },
+  { id: "richardson-168-charcoal-old-gold", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Charcoal/Old Gold", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Charcoal-_Old_Gold_Front_High.jpg", ssPartNumber: "168-CHOGLD" },
+  { id: "richardson-168-dark-green-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Dark Green/Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Dark_Green-_Black_Front_High.jpg", ssPartNumber: "168-DKGBLK" },
+  { id: "richardson-168-heather-grey-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Heather Grey/Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Heather_Grey-_Black_Front_High.jpg", popular: true, ssPartNumber: "168-HGBLK" },
+  { id: "richardson-168-loden-green", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Loden Green", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Loden_Green_Front_High.jpg", ssPartNumber: "168-LODGRN" },
+  { id: "richardson-168-navy", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Navy", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Navy_Front_High.jpg", popular: true, ssPartNumber: "168-NVY" },
+  { id: "richardson-168-pale-khaki-loden-green", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Pale Khaki/Loden Green", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Pale_Khaki-_Loden_Green_Front_High.jpg", ssPartNumber: "168-PKHILODGRN" },
+  { id: "richardson-168-red-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Red/Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Red-_Black_Front_High.jpg", ssPartNumber: "168-REDBLK" },
+  { id: "richardson-168-royal-black", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "Royal/Black", basePrice: 24, image: "/hats/richardson-168/Richardson_168_Royal-_Black_Front_High.jpg", ssPartNumber: "168-RYLBLK" },
+  { id: "richardson-168-white", brand: "Richardson", model: "168", name: "Richardson 168", colorName: "White", basePrice: 24, image: "/hats/richardson-168/Richardson_168_White_Front_High.jpg", ssPartNumber: "168-WHT" },
 ];
 
 // Richardson 220 variants - images in /hats/richardson-220/
@@ -299,6 +321,7 @@ const yupoong6506Variants: HatVariant[] = [
 export const hatVariants: HatVariant[] = [
   ...richardson112Variants,
   ...richardson112PFPVariants,
+  ...richardson168Variants,
   ...richardson220Variants,
   ...richardson258Variants,
   ...richardson256Variants,

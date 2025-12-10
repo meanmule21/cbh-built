@@ -1,6 +1,10 @@
 /**
  * SS Activewear API Client
  * Documentation: https://api.ssactivewear.com/V2/Default.aspx
+ * 
+ * Authentication: Basic Auth
+ *   - Username: Account Number
+ *   - Password: API Key (request from api@ssactivewear.com)
  */
 
 const SS_API_BASE = "https://api.ssactivewear.com/v2";
@@ -45,15 +49,33 @@ export interface SSStyle {
 }
 
 export interface SSInventory {
-  styleID: number;
+  styleID?: number;
+  sku?: string;
   partNumber: string;
   colorName: string;
   sizeName: string;
-  warehouseAbbr: string;
   qty: number;
+  warehouses?: Array<{
+    warehouseAbbr: string;
+    qty: number;
+  }>;
+}
+
+// Raw product response from SS Activewear Products API
+interface SSProductInventoryResponse {
+  sku?: string;
+  partNumber?: string;
+  colorName?: string;
+  sizeName?: string;
+  qty?: number;
+  warehouses?: Array<{
+    warehouseAbbr: string;
+    qty: number;
+  }>;
 }
 
 // Fetch styles/products from SS Activewear
+// URL format: https://api.ssactivewear.com/v2/products/?style=39
 export async function fetchSSProducts(options?: {
   brandName?: string;
   styleID?: number;
@@ -62,6 +84,7 @@ export async function fetchSSProducts(options?: {
   let url = `${SS_API_BASE}/products/`;
   
   if (options?.styleID) {
+    // Products API uses query parameter for style
     url += `?style=${options.styleID}`;
   } else if (options?.brandName) {
     url += `?brand=${encodeURIComponent(options.brandName)}`;
@@ -85,20 +108,24 @@ export async function fetchSSProducts(options?: {
   return response.json();
 }
 
-// Fetch styles (specific SKUs with colors/sizes)
+// Fetch styles (style-level info like brand, category, etc.)
+// URL format: https://api.ssactivewear.com/v2/styles/39 (styleID in path)
 export async function fetchSSStyles(options?: {
   styleID?: number;
   partNumber?: string;
   brandName?: string;
 }): Promise<SSStyle[]> {
-  let url = `${SS_API_BASE}/styles/`;
+  let url: string;
   
   if (options?.styleID) {
-    url += `?style=${options.styleID}`;
+    // Styles API uses styleID in URL path
+    url = `${SS_API_BASE}/styles/${options.styleID}`;
   } else if (options?.partNumber) {
-    url += `?partnumber=${encodeURIComponent(options.partNumber)}`;
+    url = `${SS_API_BASE}/styles/?partnumber=${encodeURIComponent(options.partNumber)}`;
   } else if (options?.brandName) {
-    url += `?brand=${encodeURIComponent(options.brandName)}`;
+    url = `${SS_API_BASE}/styles/?brand=${encodeURIComponent(options.brandName)}`;
+  } else {
+    url = `${SS_API_BASE}/styles/`;
   }
 
   const response = await fetch(url, {
@@ -118,21 +145,26 @@ export async function fetchSSStyles(options?: {
 }
 
 // Fetch real-time inventory levels
+// Per SS Activewear docs: Use Products API with query parameters
+// URL format: https://api.ssactivewear.com/v2/products/?style=39&fields=skuid,qty,warehouses
 export async function fetchSSInventory(options?: {
   styleID?: number;
   styleName?: string;
   partNumbers?: string[];
 }): Promise<SSInventory[]> {
-  let url = `${SS_API_BASE}/inventory/`;
+  let url: string;
   
   if (options?.styleID) {
-    url += `?style=${options.styleID}`;
+    // Products API uses query parameter for style, with fields filter for inventory
+    url = `${SS_API_BASE}/products/?style=${options.styleID}&fields=skuid,qty,warehouses,partNumber,colorName,sizeName`;
   } else if (options?.styleName) {
-    // Try querying by style name/number (e.g., "112" for Richardson 112)
-    url += `?style=${encodeURIComponent(options.styleName)}`;
+    // Try querying by style name/number
+    url = `${SS_API_BASE}/products/?style=${encodeURIComponent(options.styleName)}&fields=skuid,qty,warehouses,partNumber,colorName,sizeName`;
   } else if (options?.partNumbers && options.partNumbers.length > 0) {
     // Batch fetch by part numbers
-    url += `?partnumbers=${options.partNumbers.join(",")}`;
+    url = `${SS_API_BASE}/products/?partnumbers=${options.partNumbers.join(",")}&fields=skuid,qty,warehouses,partNumber,colorName,sizeName`;
+  } else {
+    throw new Error("Must provide styleID, styleName, or partNumbers");
   }
 
   console.log(`SS Activewear API request: ${url}`);
@@ -151,9 +183,29 @@ export async function fetchSSInventory(options?: {
     throw new Error(`SS Activewear API error: ${response.status} - ${errorText}`);
   }
 
-  const data = await response.json();
+  const data: SSProductInventoryResponse[] = await response.json();
   console.log(`SS Activewear returned ${Array.isArray(data) ? data.length : 0} items`);
-  return data;
+  
+  // Transform Products API response to SSInventory format
+  // Sum qty across all warehouses for each product
+  const inventory: SSInventory[] = data.map((item) => {
+    // Total qty is either provided directly or sum of warehouse quantities
+    let totalQty = item.qty ?? 0;
+    if (item.warehouses && item.warehouses.length > 0) {
+      totalQty = item.warehouses.reduce((sum, wh) => sum + (wh.qty || 0), 0);
+    }
+    
+    return {
+      sku: item.sku,
+      partNumber: item.partNumber || "",
+      colorName: item.colorName || "",
+      sizeName: item.sizeName || "",
+      qty: totalQty,
+      warehouses: item.warehouses,
+    };
+  });
+  
+  return inventory;
 }
 
 // Get total inventory across all warehouses for a part number
@@ -191,15 +243,17 @@ export async function getBatchInventory(
 }
 
 // Common SS Activewear style IDs for hats we carry
-// These map to our internal hat variants
-export const SS_STYLE_MAP = {
-  // Richardson
+// These are numeric STYLEIDs used to query the Products API
+// To find a STYLEID: Call /V2/styles/?brand=Richardson to get all styles
+export const SS_STYLE_MAP: Record<string, { styleID: number; brandName: string }> = {
+  // Richardson - verify these IDs by querying the Styles API
   "Richardson 112": { styleID: 4379, brandName: "Richardson" },
   "Richardson 112PFP": { styleID: 4380, brandName: "Richardson" },
+  "Richardson 168": { styleID: 4387, brandName: "Richardson" },
   "Richardson 220": { styleID: 4393, brandName: "Richardson" },
   "Richardson 256": { styleID: 4415, brandName: "Richardson" },
   "Richardson 258": { styleID: 4417, brandName: "Richardson" },
-  // Yupoong
+  // Yupoong - verify these IDs by querying the Styles API
   "Yupoong 6606": { styleID: 1553, brandName: "Yupoong" },
   "Yupoong 6006": { styleID: 1545, brandName: "Yupoong" },
   "Yupoong 6506": { styleID: 1551, brandName: "Yupoong" },

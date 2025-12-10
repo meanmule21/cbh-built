@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchSSInventory, SS_STYLE_MAP } from "@/app/lib/ssactivewear";
+import { fetchSSInventory } from "@/app/lib/ssactivewear";
 
 // Style ID mapping for hat models
+// These are numeric STYLEIDs used to query the SS Activewear Products API
+// To find/verify: Call /V2/styles/?brand=Richardson or /V2/styles/?brand=Yupoong
 const STYLE_IDS: Record<string, number> = {
+  // Richardson models
   "112": 4379,
   "112PFP": 4380,
+  "168": 4387,  // Verify this ID
   "220": 4393,
   "256": 4415,
   "258": 4417,
+  // Yupoong models
   "6606": 1553,
   "6006": 1545,
   "6506": 1551,
@@ -89,9 +94,22 @@ export async function GET(request: NextRequest) {
   }
 
   // Test endpoint to try fetching directly
+  // Usage: /api/inventory?test=true&styleID=4387 (or use model name)
+  // Products: /v2/products/?style=39&fields=skuid,qty,warehouses
+  // Styles: /v2/styles/39 (styleID in path)
   if (searchParams.get("test") === "true") {
-    const testStyle = searchParams.get("style") || "112";
-    const endpoint = searchParams.get("endpoint") || "inventory";
+    const testStyleID = searchParams.get("styleID") || searchParams.get("style");
+    const testModel = searchParams.get("model");
+    const endpoint = searchParams.get("endpoint") || "products";
+    
+    // Resolve model name to styleID if provided
+    let styleID = testStyleID;
+    if (testModel && STYLE_IDS[testModel]) {
+      styleID = String(STYLE_IDS[testModel]);
+    }
+    if (!styleID) {
+      styleID = "4387"; // Default to Richardson 168
+    }
     
     try {
       const SS_API_BASE = "https://api.ssactivewear.com/v2";
@@ -99,29 +117,20 @@ export async function GET(request: NextRequest) {
       const accountNumber = process.env.SSACTIVEWEAR_ACCOUNT_NUMBER || "";
       const credentials = Buffer.from(`${accountNumber}:${apiKey}`).toString("base64");
       
-      // Try different endpoints
+      // Build URL based on endpoint type
       let url: string;
-      if (endpoint === "products") {
-        url = `${SS_API_BASE}/products/?style=${testStyle}`;
-      } else if (endpoint === "styles") {
-        url = `${SS_API_BASE}/styles/?style=${testStyle}`;
-      } else if (endpoint === "partnumber") {
-        // Query by part number (e.g., "112" for Richardson 112)
-        url = `${SS_API_BASE}/styles/?partnumber=${testStyle}`;
-      } else if (endpoint === "search") {
-        // Search by keyword
-        url = `${SS_API_BASE}/products/?keyword=${encodeURIComponent(testStyle)}`;
-      } else if (endpoint === "inv-partnumber") {
-        // Try inventory by part number
-        url = `${SS_API_BASE}/inventory/?partnumber=${testStyle}`;
-      } else if (endpoint === "inv-all") {
-        // Try getting all inventory (no filter)
-        url = `${SS_API_BASE}/inventory/`;
-      } else if (endpoint === "inv-sku") {
-        // Try with specific SKU format
-        url = `${SS_API_BASE}/inventory/?sku=${testStyle}`;
+      if (endpoint === "styles") {
+        // Get style info: /v2/styles/{styleID} (path parameter)
+        url = `${SS_API_BASE}/styles/${styleID}`;
+      } else if (endpoint === "styles-brand") {
+        // Get all styles for a brand
+        url = `${SS_API_BASE}/styles/?brand=${styleID}`;
+      } else if (endpoint === "products-full") {
+        // Get full product info
+        url = `${SS_API_BASE}/products/?style=${styleID}`;
       } else {
-        url = `${SS_API_BASE}/inventory/?style=${testStyle}`;
+        // Default: Get inventory via Products API (query parameter + fields)
+        url = `${SS_API_BASE}/products/?style=${styleID}&fields=skuid,qty,warehouses,partNumber,colorName,sizeName`;
       }
       
       console.log(`Testing SS API: ${url}`);
@@ -145,15 +154,16 @@ export async function GET(request: NextRequest) {
         success: response.ok, 
         status: response.status,
         endpoint,
-        style: testStyle,
+        styleID,
+        model: testModel,
         url: url.replace(credentials, "***"),
         itemCount: Array.isArray(data) ? data.length : null,
-        sample: Array.isArray(data) ? data.slice(0, 3) : data
+        sample: Array.isArray(data) ? data.slice(0, 5) : data
       });
     } catch (error) {
       return NextResponse.json({ 
         success: false, 
-        style: testStyle,
+        styleID,
         error: error instanceof Error ? error.message : "Unknown error"
       });
     }
