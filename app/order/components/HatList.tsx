@@ -10,8 +10,9 @@ import StockIndicator from "./StockIndicator";
 interface ModelInventoryContextType {
   inventory: Record<string, number>;
   loading: boolean;
+  hasFetchedInventory: boolean; // True if we've successfully fetched inventory for this model
 }
-const ModelInventoryContext = createContext<ModelInventoryContextType>({ inventory: {}, loading: false });
+const ModelInventoryContext = createContext<ModelInventoryContextType>({ inventory: {}, loading: false, hasFetchedInventory: false });
 
 // Brand display order (fixed)
 const BRAND_ORDER = ["Richardson", "Yupoong"] as const;
@@ -347,8 +348,13 @@ function groupHatsByBrandAndModel(hats: HatVariant[]) {
 }
 
 // Try multiple strategies to find stock for a hat
-function getStockForHat(hat: HatVariant, inventory: Record<string, number>): number | null {
-  if (!hat.ssPartNumber || Object.keys(inventory).length === 0) return null;
+// Returns: number if found, null if inventory not fetched yet, 0 if fetched but item not in response
+function getStockForHat(hat: HatVariant, inventory: Record<string, number>, hasFetchedInventory: boolean): number | null {
+  // If we haven't fetched inventory yet, return null (unknown)
+  if (!hasFetchedInventory) return null;
+  
+  // If no part number, can't look up
+  if (!hat.ssPartNumber) return null;
   
   // Try full part number (uppercase)
   const fullKey = hat.ssPartNumber.toUpperCase().replace(/\s+/g, "");
@@ -365,7 +371,8 @@ function getStockForHat(hat: HatVariant, inventory: Record<string, number>): num
   const colorNameKey = hat.colorName.toUpperCase().replace(/[\s/]+/g, "");
   if (inventory[colorNameKey] !== undefined) return inventory[colorNameKey];
   
-  return null;
+  // We fetched inventory but couldn't find this item - treat as OUT OF STOCK
+  return 0;
 }
 
 // Compact hat card with instant cart sync and stock awareness
@@ -374,10 +381,11 @@ function HatCard({ hat }: { hat: HatVariant }) {
   const { discountPerHat } = calculateTotals();
   
   // Get inventory from context (provided by model section)
-  const { inventory, loading: stockLoading } = useContext(ModelInventoryContext);
+  const { inventory, loading: stockLoading, hasFetchedInventory } = useContext(ModelInventoryContext);
   
   // Get stock using multiple matching strategies
-  const stock = getStockForHat(hat, inventory);
+  // If inventory was fetched but item not found, returns 0 (out of stock)
+  const stock = getStockForHat(hat, inventory, hasFetchedInventory);
 
   const cartItem = cartItems.find((item) => item.id === hat.id);
   const quantity = cartItem?.quantity || 0;
@@ -579,6 +587,7 @@ function ModelSection({
   const [inventory, setInventory] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
+  const [hasFetchedInventory, setHasFetchedInventory] = useState(false); // Successfully fetched inventory data
 
   // Sort variants: popular first, then alphabetically by color
   const variants = [...rawVariants].sort((a, b) => {
@@ -598,6 +607,7 @@ function ModelSection({
         .then((data) => {
           if (data.inventory) {
             setInventory(data.inventory);
+            setHasFetchedInventory(true); // Mark that we successfully got inventory
           }
         })
         .catch((err) => console.error(`Error fetching inventory for ${model}:`, err))
@@ -646,7 +656,7 @@ function ModelSection({
           isExpanded ? "max-h-none opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ModelInventoryContext.Provider value={{ inventory, loading }}>
+        <ModelInventoryContext.Provider value={{ inventory, loading, hasFetchedInventory }}>
           <div className="p-3 pt-0">
             {/* 4-column grid on large screens for larger cards */}
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
