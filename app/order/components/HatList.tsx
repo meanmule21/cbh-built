@@ -6,6 +6,14 @@ import { useOrder } from "../context/OrderContext";
 import ImageModal from "./ImageModal";
 import StockIndicator from "./StockIndicator";
 
+// Stock buffer to prevent overselling
+// Subtracts this amount from displayed stock to account for:
+// - Multiple simultaneous orders
+// - API delays
+// - Warehouse counting variations
+const STOCK_BUFFER = 3; // Show 3 less than actual stock
+const LOW_STOCK_THRESHOLD = 10; // Show "Low Stock" warning when below this
+
 // Context for sharing inventory data within a model section
 interface ModelInventoryContextType {
   inventory: Record<string, number>;
@@ -348,7 +356,7 @@ function groupHatsByBrandAndModel(hats: HatVariant[]) {
 }
 
 // Try multiple strategies to find stock for a hat
-// Returns: number if found in inventory, null if can't determine stock
+// Returns: number if found in inventory (with buffer applied), null if can't determine stock
 function getStockForHat(hat: HatVariant, inventory: Record<string, number>, hasFetchedInventory: boolean): number | null {
   // If we haven't fetched inventory yet, return null (unknown)
   if (!hasFetchedInventory) return null;
@@ -359,23 +367,40 @@ function getStockForHat(hat: HatVariant, inventory: Record<string, number>, hasF
   // If inventory is empty, API might not be configured - return null (allow selection)
   if (Object.keys(inventory).length === 0) return null;
   
+  let rawStock: number | null = null;
+  
   // Try full part number (uppercase)
   const fullKey = hat.ssPartNumber.toUpperCase().replace(/\s+/g, "");
-  if (inventory[fullKey] !== undefined) return inventory[fullKey];
+  if (inventory[fullKey] !== undefined) {
+    rawStock = inventory[fullKey];
+  }
   
   // Try color code portion (after the dash)
-  const parts = hat.ssPartNumber.split("-");
-  if (parts.length > 1) {
-    const colorCode = parts.slice(1).join("-").toUpperCase();
-    if (inventory[colorCode] !== undefined) return inventory[colorCode];
+  if (rawStock === null) {
+    const parts = hat.ssPartNumber.split("-");
+    if (parts.length > 1) {
+      const colorCode = parts.slice(1).join("-").toUpperCase();
+      if (inventory[colorCode] !== undefined) {
+        rawStock = inventory[colorCode];
+      }
+    }
   }
   
   // Try color name (normalized)
-  const colorNameKey = hat.colorName.toUpperCase().replace(/[\s/]+/g, "");
-  if (inventory[colorNameKey] !== undefined) return inventory[colorNameKey];
+  if (rawStock === null) {
+    const colorNameKey = hat.colorName.toUpperCase().replace(/[\s/]+/g, "");
+    if (inventory[colorNameKey] !== undefined) {
+      rawStock = inventory[colorNameKey];
+    }
+  }
+  
+  // If we found stock, apply the buffer
+  if (rawStock !== null) {
+    // Apply buffer - never show negative stock
+    return Math.max(0, rawStock - STOCK_BUFFER);
+  }
   
   // Couldn't find a match - return null (unknown, allow selection)
-  // This prevents blocking everything if API format doesn't match
   return null;
 }
 
@@ -509,6 +534,12 @@ function HatCard({ hat }: { hat: HatVariant }) {
       {hat.ssPartNumber && (
         <div className="mb-2">
           <StockIndicator qty={stock} loading={stockLoading} />
+          {/* Low stock warning */}
+          {stock !== null && stock > 0 && stock <= LOW_STOCK_THRESHOLD && (
+            <p className="text-[10px] text-amber-600 font-medium mt-0.5">
+              ⚠️ Low stock - order soon!
+            </p>
+          )}
         </div>
       )}
 
