@@ -16,6 +16,7 @@ const STYLE_IDS: Record<string, number> = {
   "6606": 3783,
   "6006": 2523,
   "6506": 5768,
+  "6245CM": 4338,
 };
 
 // Cache inventory by styleID (refresh every 5 minutes)

@@ -257,6 +257,7 @@ export const SS_STYLE_MAP: Record<string, { styleID: number; brandName: string }
   "Yupoong 6606": { styleID: 3783, brandName: "YP Classics" },
   "Yupoong 6006": { styleID: 2523, brandName: "YP Classics" },
   "Yupoong 6506": { styleID: 5768, brandName: "YP Classics" },
+  "Yupoong 6245CM": { styleID: 4338, brandName: "YP Classics" },
 };
 
 // Search products by keyword

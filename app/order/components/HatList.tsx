@@ -28,7 +28,7 @@ const BRAND_ORDER = ["Richardson", "Yupoong"] as const;
 // Model order within each brand
 const MODEL_ORDER: Record<string, string[]> = {
   Richardson: ["112", "112PFP", "168", "220", "256", "258"],
-  Yupoong: ["6606", "6006", "6506"],
+  Yupoong: ["6606", "6006", "6506", "6245CM"],
 };
 
 export type HatVariant = {
@@ -327,6 +327,23 @@ const yupoong6506Variants: HatVariant[] = [
   { id: "yupoong-6506-white", brand: "Yupoong", model: "6506", name: "Yupoong 6506", colorName: "White", basePrice: 21, image: "/hats/yupoong-6506/YP_Classics_6506_White_Front_High.jpg", ssPartNumber: "6506-WHT" },
 ];
 
+// Yupoong 6245CM Dad Hat variants - images in /hats/yupoong-6245CM/
+// SS Activewear styleID: 4338
+const yupoong6245CMVariants: HatVariant[] = [
+  { id: "yupoong-6245cm-black", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Black", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Black_Front_High.jpg", popular: true, ssPartNumber: "6245CM-BLK" },
+  { id: "yupoong-6245cm-cranberry", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Cranberry", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Cranberry_Front_High.jpg", ssPartNumber: "6245CM-CRAN" },
+  { id: "yupoong-6245cm-dark-grey", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Dark Grey", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Dark_Grey_Front_High.jpg", popular: true, ssPartNumber: "6245CM-DKGRY" },
+  { id: "yupoong-6245cm-green-camo", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Green Camo", basePrice: 23, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Green_Camo_Front_High.jpg", ssPartNumber: "6245CM-GRNCAMO" },
+  { id: "yupoong-6245cm-khaki", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Khaki", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Khaki_Front_High.jpg", ssPartNumber: "6245CM-KHI" },
+  { id: "yupoong-6245cm-light-blue", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Light Blue", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Light_Blue_Front_High.jpg", ssPartNumber: "6245CM-LTBLU" },
+  { id: "yupoong-6245cm-navy", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Navy", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Navy_Front_High.jpg", popular: true, ssPartNumber: "6245CM-NVY" },
+  { id: "yupoong-6245cm-orange", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Orange", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Orange_Front_High.jpg", ssPartNumber: "6245CM-ORG" },
+  { id: "yupoong-6245cm-pink", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Pink", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Pink_Front_High.jpg", ssPartNumber: "6245CM-PNK" },
+  { id: "yupoong-6245cm-spruce", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Spruce", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Spruce_Front_High.jpg", ssPartNumber: "6245CM-SPRUCE" },
+  { id: "yupoong-6245cm-stone", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "Stone", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_Stone_Front_High.jpg", ssPartNumber: "6245CM-STN" },
+  { id: "yupoong-6245cm-white", brand: "Yupoong", model: "6245CM", name: "Yupoong 6245CM Dad Hat", colorName: "White", basePrice: 21, image: "/hats/yupoong-6245CM/YP_Classics_6245CM_White_Front_High.jpg", ssPartNumber: "6245CM-WHT" },
+];
+
 export const hatVariants: HatVariant[] = [
   ...richardson112Variants,
   ...richardson112PFPVariants,
@@ -337,6 +354,7 @@ export const hatVariants: HatVariant[] = [
   ...yupoong6606Variants,
   ...yupoong6006Variants,
   ...yupoong6506Variants,
+  ...yupoong6245CMVariants,
 ];
 
 function groupHatsByBrandAndModel(hats: HatVariant[]) {
