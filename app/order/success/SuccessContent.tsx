@@ -40,9 +40,9 @@ interface OrderDetails {
 }
 
 const frontLocationLabels: Record<string, string> = {
-  "front-center": "Center",
-  "front-left": "Over Left Eye",
-  "front-right": "Over Right Eye",
+  "front-center": "Front Center",
+  "front-left": "Front Left Panel",
+  "front-right": "Front Right Panel",
 };
 
 const extraLocationLabels: Record<string, string> = {
