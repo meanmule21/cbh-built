@@ -10,9 +10,9 @@ import ExitIntentPopup from "./components/ExitIntentPopup";
 import EmailSignupPopup from "./components/EmailSignupPopup";
 
 // Static counters (update these values manually as needed)
-const HATS_PRODUCED = 15600;
-const CUSTOMERS_SERVED = 300;
-const ORDERS_PLACED = 975;
+const HATS_PRODUCED = 15624;
+const CUSTOMERS_SERVED = 301;
+const ORDERS_PLACED = 976;
 
 // Icons for stat cards
 function HatIcon() {
