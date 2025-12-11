@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
+import { RewardTier, getRewardsCashPercent } from "@/lib/database.types";
 
 // Types
 export interface CartItem {
@@ -21,6 +22,13 @@ export interface EmbroideryOptions {
   artworkRightsConfirmed: boolean;
 }
 
+export interface CustomerInfo {
+  email: string;
+  reward_tier: RewardTier;
+  has_setup_fee_paid: boolean;
+  total_lifetime_spend: number;
+}
+
 export interface OrderTotals {
   hatSubtotal: number;           // Before volume discount
   volumeDiscount: number;        // Total discount from volume pricing
@@ -28,8 +36,11 @@ export interface OrderTotals {
   extraEmbroideryTotal: number;
   puffEmbroideryTotal: number;   // 3D puff cost (0 if standard)
   puffPricePerHat: number;       // Current 3D puff price per hat
-  artworkSetupFee: number;       // $40 or $0 if 12+ items
-  artworkSetupWaived: boolean;   // true if 12+ items
+  artworkSetupFee: number;       // $40 or $0 if 12+ items or returning customer
+  artworkSetupWaived: boolean;   // true if 12+ items or returning customer
+  artworkSetupWaivedReason: string | null; // "volume" | "returning" | null
+  rewardsDiscount: number;       // Rewards cash discount
+  rewardsDiscountPercent: number; // Rewards percentage
   orderTotal: number;            // Final total
   discountPerHat: number;        // Current discount per hat
 }
@@ -42,6 +53,7 @@ interface OrderContextType {
   additionalFile: File | null;
   additionalFileName: string | null;
   specialInstructions: string;
+  customerInfo: CustomerInfo | null;
   addToCart: (hat: Omit<CartItem, "quantity"> & { quantity?: number }) => void;
   updateQuantity: (hatId: string, newQty: number) => void;
   removeFromCart: (hatId: string) => void;
@@ -49,6 +61,8 @@ interface OrderContextType {
   setArtworkFile: (file: File | null) => void;
   setAdditionalFile: (file: File | null) => void;
   setSpecialInstructions: (instructions: string) => void;
+  setCustomerEmail: (email: string) => Promise<void>;
+  clearCustomerInfo: () => void;
   calculateTotals: () => OrderTotals;
   getTotalHatCount: () => number;
   getDiscountPerHat: (totalItems: number) => number;
@@ -100,6 +114,60 @@ export function OrderProvider({ children }: { children: ReactNode }) {
   const [additionalFile, setAdditionalFileState] = useState<File | null>(null);
   const [additionalFileName, setAdditionalFileName] = useState<string | null>(null);
   const [specialInstructions, setSpecialInstructionsState] = useState<string>("");
+  const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
+
+  // Check for email in URL params on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const email = params.get("email");
+      if (email) {
+        setCustomerEmail(email);
+      }
+    }
+  }, []);
+
+  const setCustomerEmail = useCallback(async (email: string) => {
+    if (!email.trim()) {
+      setCustomerInfo(null);
+      return;
+    }
+    
+    try {
+      const response = await fetch(`/api/customer?email=${encodeURIComponent(email.trim())}`);
+      const data = await response.json();
+      
+      if (data.customer) {
+        setCustomerInfo({
+          email: data.customer.email,
+          reward_tier: data.customer.reward_tier,
+          has_setup_fee_paid: data.customer.has_setup_fee_paid,
+          total_lifetime_spend: data.customer.total_lifetime_spend,
+        });
+      } else {
+        // New customer
+        setCustomerInfo({
+          email: email.toLowerCase(),
+          reward_tier: "Bronze",
+          has_setup_fee_paid: false,
+          total_lifetime_spend: 0,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching customer:", error);
+      // Default to new customer on error
+      setCustomerInfo({
+        email: email.toLowerCase(),
+        reward_tier: "Bronze",
+        has_setup_fee_paid: false,
+        total_lifetime_spend: 0,
+      });
+    }
+  }, []);
+
+  const clearCustomerInfo = useCallback(() => {
+    setCustomerInfo(null);
+  }, []);
 
   const addToCart = useCallback((hat: Omit<CartItem, "quantity"> & { quantity?: number }) => {
     const quantity = hat.quantity || 1;
@@ -175,12 +243,24 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     const puffPricePerHat = get3DPuffPricePerHat(totalHats);
     const puffEmbroideryTotal = embroideryOptions.type === "puff" ? puffPricePerHat * totalHats : 0;
 
-    // Artwork setup fee - FREE at 12+ items
-    const artworkSetupWaived = totalHats >= FREE_ARTWORK_THRESHOLD;
+    // Artwork setup fee logic:
+    // 1. FREE if 12+ items (volume waiver)
+    // 2. FREE if returning customer who has paid before
+    const volumeWaived = totalHats >= FREE_ARTWORK_THRESHOLD;
+    const returningCustomerWaived = customerInfo?.has_setup_fee_paid === true;
+    const artworkSetupWaived = volumeWaived || returningCustomerWaived;
+    const artworkSetupWaivedReason = volumeWaived ? "volume" : (returningCustomerWaived ? "returning" : null);
     const artworkSetupFee = artworkSetupWaived ? 0 : ARTWORK_SETUP_FEE;
 
+    // Calculate subtotal before rewards discount
+    const subtotalBeforeRewards = discountedHatSubtotal + extraEmbroideryTotal + puffEmbroideryTotal + artworkSetupFee;
+
+    // Rewards discount based on customer tier
+    const rewardsDiscountPercent = customerInfo ? getRewardsCashPercent(customerInfo.reward_tier) : 0;
+    const rewardsDiscount = (subtotalBeforeRewards * rewardsDiscountPercent) / 100;
+
     // Final order total
-    const orderTotal = discountedHatSubtotal + extraEmbroideryTotal + puffEmbroideryTotal + artworkSetupFee;
+    const orderTotal = subtotalBeforeRewards - rewardsDiscount;
 
     return {
       hatSubtotal,
@@ -191,10 +271,13 @@ export function OrderProvider({ children }: { children: ReactNode }) {
       puffPricePerHat,
       artworkSetupFee,
       artworkSetupWaived,
+      artworkSetupWaivedReason,
+      rewardsDiscount,
+      rewardsDiscountPercent,
       orderTotal,
       discountPerHat,
     };
-  }, [cartItems, embroideryOptions.extraLocations, embroideryOptions.type, getTotalHatCount]);
+  }, [cartItems, embroideryOptions.extraLocations, embroideryOptions.type, getTotalHatCount, customerInfo]);
 
   return (
     <OrderContext.Provider
@@ -206,6 +289,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
         additionalFile,
         additionalFileName,
         specialInstructions,
+        customerInfo,
         addToCart,
         updateQuantity,
         removeFromCart,
@@ -213,6 +297,8 @@ export function OrderProvider({ children }: { children: ReactNode }) {
         setArtworkFile,
         setAdditionalFile,
         setSpecialInstructions,
+        setCustomerEmail,
+        clearCustomerInfo,
         calculateTotals,
         getTotalHatCount,
         getDiscountPerHat,

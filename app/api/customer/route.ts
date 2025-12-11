@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomerByEmail, getCustomerOrders } from "@/lib/supabase";
+import { getCustomerByEmail, getCustomerOrders, getCustomerLogos } from "@/lib/supabase";
 
 export async function GET(request: NextRequest) {
   const email = request.nextUrl.searchParams.get("email");
@@ -12,10 +12,13 @@ export async function GET(request: NextRequest) {
     const customer = await getCustomerByEmail(email);
 
     if (!customer) {
-      return NextResponse.json({ customer: null, orders: [] });
+      return NextResponse.json({ customer: null, orders: [], logos: [] });
     }
 
-    const orders = await getCustomerOrders(email);
+    const [orders, logos] = await Promise.all([
+      getCustomerOrders(email),
+      getCustomerLogos(email),
+    ]);
 
     return NextResponse.json({
       customer: {
@@ -34,6 +37,13 @@ export async function GET(request: NextRequest) {
         total_hats: order.total_hats,
         status: order.status,
         created_at: order.created_at,
+        items: order.items,
+      })),
+      logos: logos.map((logo) => ({
+        id: logo.id,
+        filename: logo.filename,
+        public_url: logo.public_url,
+        created_at: logo.created_at,
       })),
     });
   } catch (error) {
