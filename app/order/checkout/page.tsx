@@ -149,7 +149,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="text-sm text-green-700 space-y-1">
                   {customerInfo.has_setup_fee_paid && (
-                    <p>✅ Artwork setup fee waived (returning customer)</p>
+                    <p>✅ Setup fee waived when using existing logo</p>
                   )}
                   {rewardsDiscountPercent > 0 && (
                     <p>✅ {rewardsDiscountPercent}% rewards discount applied</p>
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
                   <div className="flex items-center gap-2">
                     <span className="text-gray-400 line-through text-xs">${ARTWORK_SETUP_FEE.toFixed(2)}</span>
                     <span className="text-green-600 font-semibold">
-                      FREE {artworkSetupWaivedReason === "returning" ? "(Returning Customer)" : "(12+ hats)"}
+                      FREE {artworkSetupWaivedReason === "existing_logo" ? "(Using Existing Logo)" : "(12+ hats)"}
                     </span>
                   </div>
                 ) : (

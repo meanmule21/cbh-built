@@ -245,11 +245,12 @@ export function OrderProvider({ children }: { children: ReactNode }) {
 
     // Artwork setup fee logic:
     // 1. FREE if 12+ items (volume waiver)
-    // 2. FREE if returning customer who has paid before
+    // 2. FREE if returning customer using SAME logo (no new artwork uploaded)
+    // Note: If customer uploads new artwork, they pay the setup fee regardless of returning status
     const volumeWaived = totalHats >= FREE_ARTWORK_THRESHOLD;
-    const returningCustomerWaived = customerInfo?.has_setup_fee_paid === true;
-    const artworkSetupWaived = volumeWaived || returningCustomerWaived;
-    const artworkSetupWaivedReason = volumeWaived ? "volume" : (returningCustomerWaived ? "returning" : null);
+    const isUsingExistingLogo = customerInfo?.has_setup_fee_paid === true && !artworkFile;
+    const artworkSetupWaived = volumeWaived || isUsingExistingLogo;
+    const artworkSetupWaivedReason = volumeWaived ? "volume" : (isUsingExistingLogo ? "existing_logo" : null);
     const artworkSetupFee = artworkSetupWaived ? 0 : ARTWORK_SETUP_FEE;
 
     // Calculate subtotal before rewards discount
@@ -277,7 +278,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
       orderTotal,
       discountPerHat,
     };
-  }, [cartItems, embroideryOptions.extraLocations, embroideryOptions.type, getTotalHatCount, customerInfo]);
+  }, [cartItems, embroideryOptions.extraLocations, embroideryOptions.type, getTotalHatCount, customerInfo, artworkFile]);
 
   return (
     <OrderContext.Provider
