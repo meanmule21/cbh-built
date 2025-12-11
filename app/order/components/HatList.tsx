@@ -707,10 +707,7 @@ function ModelSection({
           {previewFront && (
             <div className="flex gap-1 flex-shrink-0">
               <ImageModal src={previewFront} alt={`${brand} ${model} Front`}>
-                <div 
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in hover:ring-2 hover:ring-primary transition-all"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in hover:ring-2 hover:ring-primary transition-all">
                   <Image
                     src={previewFront}
                     alt={`${brand} ${model} front`}
@@ -723,10 +720,7 @@ function ModelSection({
               </ImageModal>
               {previewBack && (
                 <ImageModal src={previewBack} alt={`${brand} ${model} Back`}>
-                  <div 
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in hover:ring-2 hover:ring-primary transition-all"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in hover:ring-2 hover:ring-primary transition-all">
                     <Image
                       src={previewBack}
                       alt={`${brand} ${model} back`}

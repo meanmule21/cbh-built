@@ -33,7 +33,10 @@ export default function ImageModal({ src, alt, children }: ImageModalProps) {
     <>
       {/* Clickable trigger */}
       <div 
-        onClick={() => setIsOpen(true)} 
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(true);
+        }} 
         className="cursor-zoom-in"
       >
         {children}
