@@ -8,11 +8,12 @@ import FamilyPhoto from "./components/FamilyPhoto";
 import MobileMenu from "./components/MobileMenu";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import EmailSignupPopup from "./components/EmailSignupPopup";
+import { getSiteStats } from "@/lib/supabase";
 
-// Static counters (update these values manually as needed)
-const HATS_PRODUCED = 15624;
-const CUSTOMERS_SERVED = 301;
-const ORDERS_PLACED = 976;
+// Fallback counters (used if Supabase is unavailable)
+const DEFAULT_HATS_PRODUCED = 15624;
+const DEFAULT_CUSTOMERS_SERVED = 301;
+const DEFAULT_ORDERS_PLACED = 976;
 
 // Icons for stat cards
 function HatIcon() {
@@ -119,7 +120,14 @@ const faqs = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // Fetch live stats from Supabase
+  const stats = await getSiteStats();
+  
+  const HATS_PRODUCED = stats?.total_hats_produced || DEFAULT_HATS_PRODUCED;
+  const CUSTOMERS_SERVED = stats?.total_customers || DEFAULT_CUSTOMERS_SERVED;
+  const ORDERS_PLACED = stats?.total_orders || DEFAULT_ORDERS_PLACED;
+
   return (
     <div className="min-h-screen">
       {/* Popups */}
