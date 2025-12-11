@@ -18,11 +18,15 @@ export async function GET(request: NextRequest) {
 
     // Retrieve the checkout session with line items and customer details
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ["line_items", "customer_details", "shipping_details"],
+      expand: ["line_items"],
     });
 
     // Get line items with product details
     const lineItems = await stripe.checkout.sessions.listLineItems(sessionId);
+
+    // Access shipping details (collected via shipping_address_collection)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const shippingDetails = (session as any).shipping_details;
 
     return NextResponse.json({
       id: session.id,
@@ -30,8 +34,8 @@ export async function GET(request: NextRequest) {
       currency: session.currency,
       customer_email: session.customer_details?.email,
       customer_name: session.customer_details?.name,
-      shipping_address: session.shipping_details?.address,
-      shipping_name: session.shipping_details?.name,
+      shipping_address: shippingDetails?.address,
+      shipping_name: shippingDetails?.name,
       line_items: lineItems.data.map((item) => ({
         description: item.description,
         quantity: item.quantity,
@@ -49,4 +53,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
