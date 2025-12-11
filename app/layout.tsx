@@ -76,15 +76,7 @@ export const metadata: Metadata = {
     images: ["/cbh-logo-dark.png.jpg"],
     creator: "@custombusinesshats",
   },
-  // Verification - Add your Google Search Console code here
-  // 1. Go to https://search.google.com/search-console
-  // 2. Add your property (custombusinesshats.com)
-  // 3. Choose "HTML tag" verification method
-  // 4. Copy the content value and paste below
-  verification: {
-    google: "ADD_YOUR_GOOGLE_VERIFICATION_CODE_HERE",
-    // yandex: "your-yandex-verification-code",
-  },
+  // Site verified via Google Search Console
   // Canonical URL
   alternates: {
     canonical: "https://custombusinesshats.com",
