@@ -708,28 +708,53 @@ function ModelSection({
     return total + (cartItem?.quantity || 0);
   }, 0);
 
-  // Get the first variant's image for preview
-  const previewImage = variants[0]?.image;
+  // Get the first variant's images for preview
+  const previewFront = variants[0]?.image;
+  const previewBack = variants[0]?.backImage;
 
   return (
     <div className="overflow-hidden">
       {/* Model Header - Clickable */}
-      <button
+      <div
         onClick={onToggle}
-        className="w-full p-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
+        className="w-full p-3 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          {/* Preview image of the hat style */}
-          {previewImage && (
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-              <Image
-                src={previewImage}
-                alt={`${brand} ${model} preview`}
-                width={56}
-                height={56}
-                className="w-full h-full object-contain"
-                unoptimized
-              />
+          {/* Preview images of the hat style - front and back */}
+          {previewFront && (
+            <div className="flex gap-1 flex-shrink-0">
+              <ImageModal src={previewFront} alt={`${brand} ${model} Front`}>
+                <div 
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in hover:ring-2 hover:ring-primary transition-all"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Image
+                    src={previewFront}
+                    alt={`${brand} ${model} front`}
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-contain"
+                    unoptimized
+                  />
+                </div>
+              </ImageModal>
+              {previewBack && (
+                <ImageModal src={previewBack} alt={`${brand} ${model} Back`}>
+                  <div 
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 cursor-zoom-in hover:ring-2 hover:ring-primary transition-all"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Image
+                      src={previewBack}
+                      alt={`${brand} ${model} back`}
+                      width={56}
+                      height={56}
+                      className="w-full h-full object-contain"
+                      unoptimized
+                    />
+                  </div>
+                </ImageModal>
+              )}
             </div>
           )}
           <div className="flex flex-col items-start gap-1">
@@ -756,7 +781,7 @@ function ModelSection({
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
-      </button>
+      </div>
 
       {/* Collapsible Content with Inventory Context */}
       <div
