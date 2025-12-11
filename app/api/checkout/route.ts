@@ -37,6 +37,11 @@ export async function POST(request: NextRequest) {
     const body: CheckoutRequest = await request.json();
     const { cartItems, embroideryOptions, totals, artworkFileName } = body;
 
+    // Determine the base URL from the request (works in all environments)
+    const protocol = request.headers.get("x-forwarded-proto") || "https";
+    const host = request.headers.get("host") || "localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}://${host}`;
+
     // Build line items for Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
@@ -109,8 +114,8 @@ export async function POST(request: NextRequest) {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/order/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/order/checkout`,
+      success_url: `${baseUrl}/order/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/order/checkout`,
       shipping_address_collection: {
         allowed_countries: ["US"],
       },
