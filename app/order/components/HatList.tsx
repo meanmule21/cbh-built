@@ -47,7 +47,7 @@ export type HatVariant = {
 // Richardson 112 variants - images in /hats/richardson-112/
 // SS Activewear part numbers added for real-time inventory
 const richardson112Variants: HatVariant[] = [
-  { id: "richardson-112-black", brand: "Richardson", model: "112", name: "Richardson 112", colorName: "Black", basePrice: 22, image: "/hats/richardson-112/Richardson_112_Black_Front_High.jpg", popular: true, ssPartNumber: "112-BLK" },
+  { id: "richardson-112-black", brand: "Richardson", model: "112", name: "Richardson 112", colorName: "Black", basePrice: 22, image: "/hats/richardson-112/Richardson_112_Black_Front_High.jpg", backImage: "/hats/Richardson_112_Black_Back_High.jpg", popular: true, ssPartNumber: "112-BLK" },
   { id: "richardson-112-black-charcoal", brand: "Richardson", model: "112", name: "Richardson 112", colorName: "Black/Charcoal", basePrice: 22, image: "/hats/richardson-112/Richardson_112_Black-_Charcoal_Front_High.jpg", popular: true, ssPartNumber: "112-BLKCH" },
   { id: "richardson-112-charcoal-black", brand: "Richardson", model: "112", name: "Richardson 112", colorName: "Charcoal/Black", basePrice: 22, image: "/hats/richardson-112/Richardson_112_Charcoal-_Black_Front_High.jpg", ssPartNumber: "112-CHBLK" },
   { id: "richardson-112-heather-grey-black", brand: "Richardson", model: "112", name: "Richardson 112", colorName: "Heather Grey/Black", basePrice: 22, image: "/hats/richardson-112/Richardson_112_Heather_Grey-_Black_Front_High.jpg", popular: true, ssPartNumber: "112-HGBLK" },
