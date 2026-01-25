@@ -1,0 +1,12 @@
+# robots.txt for Custom Business Hats
+# https://custombusinesshats.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://custombusinesshats.com/sitemap.xml
+
+# Disallow admin/api routes
+Disallow: /api/
+
