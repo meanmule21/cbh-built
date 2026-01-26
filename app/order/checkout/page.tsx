@@ -25,7 +25,6 @@ export default function CheckoutPage() {
     calculateTotals, 
     getTotalHatCount,
     customerInfo,
-    setCustomerEmail,
   } = useOrder();
   const totals = calculateTotals();
   const { 
@@ -47,15 +46,6 @@ export default function CheckoutPage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [emailInput, setEmailInput] = useState(customerInfo?.email || "");
-  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
-
-  const handleEmailCheck = async () => {
-    if (!emailInput.trim()) return;
-    setIsCheckingEmail(true);
-    await setCustomerEmail(emailInput.trim());
-    setIsCheckingEmail(false);
-  };
 
   const handlePayNow = async () => {
     setIsLoading(true);
@@ -87,60 +77,6 @@ export default function CheckoutPage() {
       </div>
 
       <div className="space-y-6">
-        {/* Returning Customer Check */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="bg-gradient-to-r from-royal to-primary px-6 py-4">
-            <h2 className="text-lg font-bold text-white">🎁 Check for Rewards</h2>
-          </div>
-          <div className="p-6">
-            <p className="text-gray-600 mb-4 text-sm">
-              Ordered before? Enter your email to apply your rewards and skip the setup fee!
-            </p>
-            <div className="flex gap-3">
-              <input
-                type="email"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="your@email.com"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
-              />
-              <Button 
-                onClick={handleEmailCheck} 
-                disabled={isCheckingEmail || !emailInput.trim()}
-                className="text-sm px-4"
-              >
-                {isCheckingEmail ? "Checking..." : "Apply"}
-              </Button>
-            </div>
-            
-            {customerInfo && (
-              <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl">
-                    {customerInfo.reward_tier === "Bronze" ? "🥉" : 
-                     customerInfo.reward_tier === "Silver" ? "🥈" : 
-                     customerInfo.reward_tier === "Gold" ? "🥇" : 
-                     customerInfo.reward_tier === "VIP" ? "⭐" : 
-                     customerInfo.reward_tier === "Elite" ? "💎" : 
-                     customerInfo.reward_tier === "Diamond" ? "💠" : "👑"}
-                  </span>
-                  <div>
-                    <p className="font-bold text-green-800">{customerInfo.reward_tier} Member</p>
-                    <p className="text-sm text-green-600">{customerInfo.email}</p>
-                  </div>
-                </div>
-                <div className="text-sm text-green-700 space-y-1">
-                  {customerInfo.has_setup_fee_paid && (
-                    <p>✅ Setup fee waived when using existing logo</p>
-                  )}
-                  {rewardsDiscountPercent > 0 && (
-                    <p>✅ {rewardsDiscountPercent}% rewards discount applied</p>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
 
         {/* Order Summary */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">

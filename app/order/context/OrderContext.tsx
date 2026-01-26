@@ -1,7 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
 import { RewardTier, getRewardsCashPercent } from "@/lib/database.types";
+
+// Order context for managing cart and customer information
 
 // Types
 export interface CartItem {
@@ -61,7 +63,6 @@ interface OrderContextType {
   setArtworkFile: (file: File | null) => void;
   setAdditionalFile: (file: File | null) => void;
   setSpecialInstructions: (instructions: string) => void;
-  setCustomerEmail: (email: string) => Promise<void>;
   clearCustomerInfo: () => void;
   calculateTotals: () => OrderTotals;
   getTotalHatCount: () => number;
@@ -115,55 +116,6 @@ export function OrderProvider({ children }: { children: ReactNode }) {
   const [additionalFileName, setAdditionalFileName] = useState<string | null>(null);
   const [specialInstructions, setSpecialInstructionsState] = useState<string>("");
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
-
-  // Check for email in URL params on mount
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const email = params.get("email");
-      if (email) {
-        setCustomerEmail(email);
-      }
-    }
-  }, [setCustomerEmail]);
-
-  const setCustomerEmail = useCallback(async (email: string) => {
-    if (!email.trim()) {
-      setCustomerInfo(null);
-      return;
-    }
-    
-    try {
-      const response = await fetch(`/api/customer?email=${encodeURIComponent(email.trim())}`);
-      const data = await response.json();
-      
-      if (data.customer) {
-        setCustomerInfo({
-          email: data.customer.email,
-          reward_tier: data.customer.reward_tier,
-          has_setup_fee_paid: data.customer.has_setup_fee_paid,
-          total_lifetime_spend: data.customer.total_lifetime_spend,
-        });
-      } else {
-        // New customer
-        setCustomerInfo({
-          email: email.toLowerCase(),
-          reward_tier: "Bronze",
-          has_setup_fee_paid: false,
-          total_lifetime_spend: 0,
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching customer:", error);
-      // Default to new customer on error
-      setCustomerInfo({
-        email: email.toLowerCase(),
-        reward_tier: "Bronze",
-        has_setup_fee_paid: false,
-        total_lifetime_spend: 0,
-      });
-    }
-  }, []);
 
   const clearCustomerInfo = useCallback(() => {
     setCustomerInfo(null);
@@ -298,7 +250,6 @@ export function OrderProvider({ children }: { children: ReactNode }) {
         setArtworkFile,
         setAdditionalFile,
         setSpecialInstructions,
-        setCustomerEmail,
         clearCustomerInfo,
         calculateTotals,
         getTotalHatCount,
