@@ -1,31 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  /* CBH Brand Colors */
+  /* CBH Brand Colors - Black & Yellow Theme */
   --white: #FFFFFF;
   --black: #000000;
-  --navy: #201754;
-  --royal: #422f89;
-  --pink: #ed6fa8;
-  --magenta: #b83e84;
+  --yellow: #FFD700;
+  --yellow-dark: #FFA500;
+  --yellow-light: #FFEB3B;
   
   /* UI Aliases */
-  --primary: #201754;
-  --secondary: #422f89;
-  --accent: #ed6fa8;
-  --accent-dark: #b83e84;
+  --primary: #000000;
+  --secondary: #1a1a1a;
+  --accent: #FFD700;
+  --accent-dark: #FFA500;
   --background: #FFFFFF;
   --text: #000000;
 }
 
 @theme inline {
-  /* CBH Brand Colors */
+  /* CBH Brand Colors - Black & Yellow Theme */
   --color-white: var(--white);
   --color-black: var(--black);
-  --color-navy: var(--navy);
-  --color-royal: var(--royal);
-  --color-pink: var(--pink);
-  --color-magenta: var(--magenta);
+  --color-yellow: var(--yellow);
+  --color-yellow-dark: var(--yellow-dark);
+  --color-yellow-light: var(--yellow-light);
   
   /* UI Semantic Colors */
   --color-primary: var(--primary);
@@ -58,12 +56,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--royal);
+  background: var(--yellow);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--navy);
+  background: var(--yellow-dark);
 }
 
 /* Focus styles */
@@ -74,6 +72,6 @@ body {
 
 /* Selection styles */
 ::selection {
-  background-color: var(--pink);
-  color: var(--white);
+  background-color: var(--yellow);
+  color: var(--black);
 }

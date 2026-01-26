@@ -125,7 +125,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
         setCustomerEmail(email);
       }
     }
-  }, []);
+  }, [setCustomerEmail]);
 
   const setCustomerEmail = useCallback(async (email: string) => {
     if (!email.trim()) {

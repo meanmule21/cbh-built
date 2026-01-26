@@ -10,8 +10,8 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="mb-4">
               <img 
-                src="/cbh-logo-dark.png.jpg" 
-                alt="Custom Business Hats - Premium Custom Embroidered Hats Made in USA" 
+                src="/mean-mule-logo.png" 
+                alt="Mean Mule Apparel - Hard Headed, Hard Working" 
                 className="h-16 sm:h-20 object-contain"
               />
             </div>
@@ -20,11 +20,11 @@ export default function Footer() {
             </p>
             {/* Contact Info */}
             <div className="space-y-2 text-sm">
-              <a href="mailto:support@custombusinesshats.com" className="flex items-center gap-2 text-white/70 hover:text-pink transition-colors">
+              <a href="mailto:sales@meanmuleapparel.com" className="flex items-center gap-2 text-white/70 hover:text-pink transition-colors">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                support@custombusinesshats.com
+                sales@meanmuleapparel.com
               </a>
             </div>
           </div>

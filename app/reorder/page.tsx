@@ -23,13 +23,7 @@ export default function ReorderPage() {
     // For now, simulate a lookup delay
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Placeholder: In production, this would query Supabase/database
-    // const { data, error } = await supabase
-    //   .from('orders')
-    //   .select('*')
-    //   .eq('email', email)
-    //   .eq('order_number', orderNumber)
-    //   .single();
+    // TODO: Query order from Drupal database
 
     setIsLoading(false);
 
@@ -136,7 +130,7 @@ export default function ReorderPage() {
               </Link>
               
               <a
-                href="mailto:support@custombusinesshats.com?subject=Reorder%20Request"
+                href="mailto:sales@meanmuleapparel.com?subject=Reorder%20Request"
                 className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-primary/50 transition-colors group"
               >
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">

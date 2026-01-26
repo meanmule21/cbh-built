@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     description: "Order premium custom embroidered hats for your business, team, or event. No minimums, free shipping on 24+ hats. Made in USA.",
     images: [
       {
-        url: "/cbh-logo-dark.png.jpg",
+        url: "/mean-mule-logo.png",
         width: 1200,
         height: 630,
         alt: "Custom Business Hats - Premium Embroidered Hats",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Custom Business Hats | Premium Embroidered Hats",
     description: "Order premium custom embroidered hats. No minimums, free shipping on 24+ hats. Made in USA.",
-    images: ["/cbh-logo-dark.png.jpg"],
+    images: ["/mean-mule-logo.png"],
     creator: "@custombusinesshats",
   },
   // Site verified via Google Search Console
@@ -93,8 +93,8 @@ const structuredData = {
   name: "Custom Business Hats",
   description: "Premium custom embroidered hats for businesses, teams, and events. Richardson, Yupoong, Flexfit and more.",
   url: "https://custombusinesshats.com",
-  email: "support@custombusinesshats.com",
-  image: "https://custombusinesshats.com/cbh-logo-dark.png",
+  email: "sales@meanmuleapparel.com",
+  image: "https://custombusinesshats.com/mean-mule-logo.png",
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",

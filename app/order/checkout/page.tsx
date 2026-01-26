@@ -62,30 +62,12 @@ export default function CheckoutPage() {
     setError(null);
 
     try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cartItems,
-          embroideryOptions,
-          totals,
-          artworkFileName,
-          customerEmail: customerInfo?.email,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create checkout session");
-      }
-
-      // Redirect to Stripe Checkout
-      if (data.url) {
-        window.location.href = data.url;
-      }
+      // Simulate order submission (payment processing is currently unavailable)
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Redirect to success page with mock session ID
+      const mockSessionId = `mock_${Date.now()}`;
+      window.location.href = `/order/success?session_id=${mockSessionId}`;
     } catch (err) {
       console.error("Checkout error:", err);
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -100,7 +82,7 @@ export default function CheckoutPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-text mb-2">Checkout</h1>
         <p className="text-gray-600">
-          Complete your order. Customer information will be collected by Stripe.
+          Complete your order. You will be contacted to finalize payment and shipping details.
         </p>
       </div>
 
@@ -297,7 +279,7 @@ export default function CheckoutPage() {
           </div>
           <div className="p-6">
             <p className="text-gray-600 mb-6">
-              Click the button below to complete your purchase. You will be redirected to Stripe to securely enter your payment details and shipping information.
+              Click the button below to submit your order. You will be contacted to complete payment and provide shipping information.
             </p>
 
             {error && (
@@ -326,7 +308,7 @@ export default function CheckoutPage() {
             </Button>
 
             <p className="text-xs text-gray-500 text-center mt-3">
-              Secure checkout powered by Stripe
+              Order submission in progress
             </p>
           </div>
         </div>

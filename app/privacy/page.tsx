@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <header className="bg-primary text-white py-4">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/cbh-icon.png.jpg" alt="CBH Logo" className="w-10 h-10 rounded" />
+            <img src="/mean-mule-logo.png" alt="Mean Mule Apparel Logo" className="w-10 h-10 rounded" />
             <span className="font-bold text-lg">Custom Business Hats</span>
           </Link>
           <Link href="/" className="text-sm hover:underline">
@@ -138,8 +138,8 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="mt-4">
               <strong>Email:</strong>{" "}
-              <a href="mailto:support@custombusinesshats.com" className="text-accent hover:underline">
-                support@custombusinesshats.com
+              <a href="mailto:sales@meanmuleapparel.com" className="text-accent hover:underline">
+                sales@meanmuleapparel.com
               </a>
             </p>
           </section>

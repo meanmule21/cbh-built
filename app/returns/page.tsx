@@ -12,7 +12,7 @@ export default function ReturnPolicyPage() {
       <header className="bg-primary text-white py-4">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/cbh-icon.png.jpg" alt="CBH Logo" className="w-10 h-10 rounded" />
+            <img src="/mean-mule-logo.png" alt="Mean Mule Apparel Logo" className="w-10 h-10 rounded" />
             <span className="font-bold text-lg">Custom Business Hats</span>
           </Link>
           <Link href="/" className="text-sm hover:underline">
@@ -98,8 +98,8 @@ export default function ReturnPolicyPage() {
               <ol className="list-decimal pl-6 space-y-4">
                 <li>
                   <strong>Contact us within 7 days</strong> of receiving your order at{" "}
-                  <a href="mailto:support@custombusinesshats.com" className="text-accent hover:underline">
-                    support@custombusinesshats.com
+                  <a href="mailto:sales@meanmuleapparel.com" className="text-accent hover:underline">
+                    sales@meanmuleapparel.com
                   </a>
                 </li>
                 <li>
@@ -173,8 +173,8 @@ export default function ReturnPolicyPage() {
             </p>
             <p className="mt-4">
               <strong>Email:</strong>{" "}
-              <a href="mailto:support@custombusinesshats.com" className="text-accent hover:underline">
-                support@custombusinesshats.com
+              <a href="mailto:sales@meanmuleapparel.com" className="text-accent hover:underline">
+                sales@meanmuleapparel.com
               </a>
             </p>
             <p className="text-gray-600 mt-2">

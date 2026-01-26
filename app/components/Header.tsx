@@ -11,8 +11,8 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
             <img 
-              src="/cbh-logo-dark.png.jpg" 
-              alt="Custom Business Hats Logo - Order Custom Embroidered Hats" 
+              src="/mean-mule-logo.png" 
+              alt="Mean Mule Apparel Logo - Hard Headed, Hard Working" 
               className="h-16 sm:h-20 object-contain"
             />
           </Link>

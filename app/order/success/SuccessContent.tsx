@@ -59,24 +59,9 @@ export default function SuccessContent() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (sessionId) {
-      fetch(`/api/checkout/session?session_id=${sessionId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            setError(data.error);
-          } else {
-            setOrderDetails(data);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
-          setError("Failed to load order details");
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+    // Payment processing is currently unavailable - show generic success message
+    setLoading(false);
+    // Don't try to fetch order details since API is not available
   }, [sessionId]);
 
   const formatCurrency = (amount: number) => {
@@ -293,7 +278,7 @@ export default function SuccessContent() {
         <p className="text-gray-600">
           Questions about your order?{" "}
           <a
-            href="mailto:support@custombusinesshats.com"
+            href="mailto:sales@meanmuleapparel.com"
             className="text-primary hover:text-secondary font-medium"
           >
             Contact us

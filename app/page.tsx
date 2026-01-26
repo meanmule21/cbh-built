@@ -8,9 +8,7 @@ import FamilyPhoto from "./components/FamilyPhoto";
 import MobileMenu from "./components/MobileMenu";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import EmailSignupPopup from "./components/EmailSignupPopup";
-import { getSiteStats } from "@/lib/supabase";
-
-// Fallback counters (used if Supabase is unavailable)
+// Default counters (will be replaced with Drupal data)
 const DEFAULT_HATS_PRODUCED = 15624;
 const DEFAULT_CUSTOMERS_SERVED = 301;
 const DEFAULT_ORDERS_PLACED = 976;
@@ -18,7 +16,7 @@ const DEFAULT_ORDERS_PLACED = 976;
 // Icons for stat cards
 function HatIcon() {
   return (
-    <svg className="w-7 h-7 text-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-7 h-7 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>
   );
@@ -26,7 +24,7 @@ function HatIcon() {
 
 function CustomerIcon() {
   return (
-    <svg className="w-7 h-7 text-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-7 h-7 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   );
@@ -34,7 +32,7 @@ function CustomerIcon() {
 
 function OrderIcon() {
   return (
-    <svg className="w-7 h-7 text-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-7 h-7 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
     </svg>
   );
@@ -121,12 +119,11 @@ const faqs = [
 ];
 
 export default async function Home() {
-  // Fetch live stats from Supabase
-  const stats = await getSiteStats();
-  
-  const HATS_PRODUCED = stats?.total_hats_produced || DEFAULT_HATS_PRODUCED;
-  const CUSTOMERS_SERVED = stats?.total_customers || DEFAULT_CUSTOMERS_SERVED;
-  const ORDERS_PLACED = stats?.total_orders || DEFAULT_ORDERS_PLACED;
+  // TODO: Fetch live stats from Drupal
+  // For now, using default values
+  const HATS_PRODUCED = DEFAULT_HATS_PRODUCED;
+  const CUSTOMERS_SERVED = DEFAULT_CUSTOMERS_SERVED;
+  const ORDERS_PLACED = DEFAULT_ORDERS_PLACED;
 
   return (
     <div className="min-h-screen">
@@ -135,32 +132,32 @@ export default async function Home() {
       <EmailSignupPopup />
 
       {/* Trust Bar - Static */}
-      <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-2">
+      <div className="bg-yellow text-black py-2">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs sm:text-sm font-medium">
             <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               <span>Free Shipping on 24+ Hats</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-white/30" />
             <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               <span>100% Satisfaction Guarantee</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-white/30" />
             <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               <span>Fast Turnaround</span>
             </div>
             <div className="hidden md:block w-px h-4 bg-white/30" />
             <div className="hidden md:flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               <span>No Minimum Order</span>
@@ -170,14 +167,14 @@ export default async function Home() {
       </div>
 
       {/* Sticky Navigation - Logo left, Nav center, Start Your Order right */}
-      <nav className="sticky top-0 z-50 bg-primary shadow-lg relative">
+      <nav className="sticky top-0 z-50 bg-white border-b-2 border-black shadow-lg relative">
         <div className="px-2 sm:px-4 py-px">
           <div className="flex items-center justify-between">
             {/* Logo - Left */}
             <div className="flex items-center">
               <img 
-                src="/cbh-logo-dark.png.jpg" 
-                alt="Custom Business Hats Logo - Premium Embroidered Hats" 
+                src="/mean-mule-logo.png" 
+                alt="Mean Mule Apparel Logo - Hard Headed, Hard Working" 
                 className="h-16 sm:h-20 object-contain"
               />
             </div>
@@ -186,19 +183,19 @@ export default async function Home() {
             <div className="hidden md:flex items-center gap-12 text-xl font-semibold absolute left-1/2 -translate-x-1/2">
               <a 
                 href="#about" 
-                className="text-white/90 hover:text-pink transition-colors"
+                className="text-black hover:text-yellow transition-colors"
               >
                 About Us
               </a>
               <a 
                 href="#faq" 
-                className="text-white/90 hover:text-pink transition-colors"
+                className="text-black hover:text-yellow transition-colors"
               >
                 FAQ
               </a>
               <a 
                 href="/reorder" 
-                className="text-white/90 hover:text-pink transition-colors"
+                className="text-black hover:text-yellow transition-colors"
               >
                 Customer Login
               </a>
@@ -209,7 +206,7 @@ export default async function Home() {
               {/* Start Your Order Button */}
               <a
                 href="/order/hats"
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-accent hover:bg-accent-dark text-white font-semibold transition-colors text-xs sm:text-base"
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-yellow hover:bg-yellow-dark text-black font-semibold transition-colors text-xs sm:text-base"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -226,33 +223,33 @@ export default async function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative bg-primary overflow-hidden">
+      <section className="relative bg-white overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-royal/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-pink/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-royal/20 to-magenta/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-yellow/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-yellow/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-yellow/10 to-yellow/5 rounded-full blur-3xl" />
         </div>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 pt-8 pb-20">
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-sm text-white/90">Trusted by 300+ businesses</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow rounded-full border-2 border-black mb-8">
+              <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+              <span className="text-sm text-black font-semibold">Trusted by 300+ businesses</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
               Professional Custom Hats{" "}
-              <span className="bg-gradient-to-r from-pink to-magenta bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-yellow to-yellow-dark bg-clip-text text-transparent">
                 Your Team Will Actually Wear
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-black/70 mb-8 max-w-2xl mx-auto leading-relaxed">
               Premium embroidered hats from Richardson, Yupoong & more. 
               No minimums. No hidden fees. 10-15 business day turnaround.
             </p>
@@ -261,7 +258,7 @@ export default async function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
               <Button
                 href="/order/hats"
-                className="text-lg px-8 py-4 bg-accent hover:bg-accent-dark shadow-lg shadow-pink/30 hover:shadow-xl hover:shadow-pink/40 hover:scale-105"
+                className="text-lg px-8 py-4 bg-yellow hover:bg-yellow-dark text-black shadow-lg shadow-yellow/30 hover:shadow-xl hover:shadow-yellow/40 hover:scale-105"
               >
                 Start Your Order
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,7 +268,7 @@ export default async function Home() {
               <Button
                 href="/reorder"
                 variant="outline"
-                className="text-lg px-8 py-4 border-white/30 text-white hover:bg-white/10"
+                className="text-lg px-8 py-4 border-2 border-black text-black hover:bg-yellow"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -287,7 +284,7 @@ export default async function Home() {
                 <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-sm text-white font-medium">SSL Secured</span>
+                <span className="text-sm text-black font-medium">SSL Secured</span>
               </div>
               
               {/* Satisfaction Guarantee */}
@@ -301,7 +298,7 @@ export default async function Home() {
               {/* Made in USA */}
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20">
                 <span className="text-lg">🇺🇸</span>
-                <span className="text-sm text-white font-medium">Made in USA</span>
+                <span className="text-sm text-black font-medium">Made in USA</span>
               </div>
               
               {/* Secure Payments */}
@@ -315,9 +312,9 @@ export default async function Home() {
             </div>
 
             {/* Additional trust text */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/60">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-black/70">
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-yellow" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 Free artwork proof
@@ -348,10 +345,10 @@ export default async function Home() {
           <div className="mt-16">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 mb-2">
-                <span className="text-xl font-bold text-white">Google</span>
-                <span className="text-white/60">Reviews</span>
+                <span className="text-xl font-bold text-black">Google</span>
+                <span className="text-black/60">Reviews</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold text-black">
                 What Our Customers Say
               </h2>
             </div>
@@ -362,13 +359,13 @@ export default async function Home() {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-12 bg-gradient-to-r from-pink to-magenta">
+      <section className="py-12 bg-yellow border-t-2 border-b-2 border-black">
         <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-sm text-white/80 mb-6">TRUSTED BY BUSINESSES LIKE</p>
+          <p className="text-center text-sm text-black/80 mb-6 font-bold">TRUSTED BY BUSINESSES LIKE</p>
           <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
             {/* Placeholder company names */}
             {["Construction Co.", "Local Brewery", "Fitness Center", "Auto Shop", "Tech Startup", "Restaurant Group"].map((company) => (
-              <div key={company} className="text-white/70 font-semibold text-lg">
+              <div key={company} className="text-black font-semibold text-lg">
                 {company}
               </div>
             ))}
@@ -377,13 +374,13 @@ export default async function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 bg-gradient-to-br from-royal to-secondary text-white">
+      <section id="how-it-works" className="py-20 bg-white text-black">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               How It Works
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
+            <p className="text-black/70 max-w-2xl mx-auto">
               Get your custom embroidered hats in 3 simple steps
             </p>
           </div>
@@ -391,44 +388,44 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="relative text-center">
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30">
-                <span className="text-2xl font-bold text-white">1</span>
+              <div className="w-16 h-16 bg-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-black">
+                <span className="text-2xl font-bold text-black">1</span>
               </div>
               <h3 className="text-xl font-semibold mb-3">Choose Your Hats</h3>
-              <p className="text-white/70">
+              <p className="text-black/70">
                 Select from premium brands like Richardson, Yupoong, Otto & Flexfit. Pick your colors and quantities.
               </p>
               {/* Connector line */}
-              <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-white/30 to-transparent" />
+              <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-yellow/50 to-transparent" />
             </div>
 
             {/* Step 2 */}
             <div className="relative text-center">
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30">
-                <span className="text-2xl font-bold text-white">2</span>
+              <div className="w-16 h-16 bg-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-black">
+                <span className="text-2xl font-bold text-black">2</span>
               </div>
               <h3 className="text-xl font-semibold mb-3">Upload Your Logo</h3>
-              <p className="text-white/70">
+              <p className="text-black/70">
                 Upload your artwork and choose embroidery options. We&apos;ll send a free proof for approval.
               </p>
               {/* Connector line */}
-              <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-white/30 to-transparent" />
+              <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-yellow/50 to-transparent" />
             </div>
 
             {/* Step 3 */}
             <div className="text-center">
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30">
-                <span className="text-2xl font-bold text-white">3</span>
+              <div className="w-16 h-16 bg-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-black">
+                <span className="text-2xl font-bold text-black">3</span>
               </div>
               <h3 className="text-xl font-semibold mb-3">We Stitch & Ship</h3>
-              <p className="text-white/70">
+              <p className="text-black/70">
                 Our team embroiders your hats with precision. Ships in 10-15 business days, right to your door.
               </p>
             </div>
           </div>
 
           <div className="text-center mt-12">
-            <Button href="/order/hats" className="px-8 py-4 bg-accent hover:bg-accent-dark">
+            <Button href="/order/hats" className="px-8 py-4 bg-yellow hover:bg-yellow-dark text-black">
               Start Your Order Now
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -439,13 +436,13 @@ export default async function Home() {
       </section>
 
       {/* About Us - Family Story Section */}
-      <section id="about" className="py-20 bg-gradient-to-br from-pink to-magenta text-white scroll-mt-20">
+      <section id="about" className="py-20 bg-yellow text-black scroll-mt-20 border-t-2 border-black">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Meet Our Family
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-lg">
+            <p className="text-black/70 max-w-2xl mx-auto text-lg">
               The heart behind every stitch
             </p>
           </div>
@@ -453,7 +450,7 @@ export default async function Home() {
           {/* Family Story */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Family Photo - Add your image to /public/family/ folder */}
-            <div className="rounded-2xl bg-white/10 border border-white/20 overflow-hidden">
+            <div className="rounded-2xl bg-white border-2 border-black overflow-hidden">
               <FamilyPhoto 
                 src="/family/family.jpg.png" 
                 alt="Custom Business Hats Family - Our team behind every custom embroidered hat" 
@@ -466,67 +463,67 @@ export default async function Home() {
               <h3 className="text-2xl sm:text-3xl font-bold">
                 A Family Business Built on Quality & Trust
               </h3>
-              <p className="text-white/80 text-lg leading-relaxed">
+              <p className="text-black/80 text-lg leading-relaxed">
                 What started as a small side project in our garage has grown into something 
                 we&apos;re truly proud of. We&apos;re not a massive corporation — we&apos;re a family 
                 that genuinely cares about every single hat that leaves our shop.
               </p>
-              <p className="text-white/80 text-lg leading-relaxed">
+              <p className="text-black/80 text-lg leading-relaxed">
                 When you order from Custom Business Hats, you&apos;re not just getting a product. 
                 You&apos;re getting our personal commitment to quality. We inspect every stitch, 
                 we pack every box with care, and we treat your business like it&apos;s our own.
               </p>
-              <p className="text-white/80 text-lg leading-relaxed">
+              <p className="text-black/80 text-lg leading-relaxed">
                 Thank you for trusting us with your brand. It means more than you know.
               </p>
-              <p className="text-xl font-semibold text-pink-200 italic">
+              <p className="text-xl font-semibold text-black italic">
                 — The Custom Business Hats Family
               </p>
             </div>
           </div>
 
           {/* Why Choose Us - Features */}
-          <div className="border-t border-white/20 pt-16">
+          <div className="border-t-2 border-black pt-16">
             <h3 className="text-2xl font-bold text-center mb-10">Why Customers Love Working With Us</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-2xl border-2 border-black">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">No Minimums</h3>
-                <p className="text-white/70 text-sm">Order 1 hat or 1,000. Volume discounts available but never required.</p>
+                <p className="text-black/70 text-sm">Order 1 hat or 1,000. Volume discounts available but never required.</p>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-2xl border-2 border-black">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Fast Turnaround</h3>
-                <p className="text-white/70 text-sm">10-15 business days standard. Rush options available when you need it faster.</p>
+                <p className="text-black/70 text-sm">10-15 business days standard. Rush options available when you need it faster.</p>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-2xl border-2 border-black">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Quality Guarantee</h3>
-                <p className="text-white/70 text-sm">100% satisfaction guaranteed. If you&apos;re not happy, we&apos;ll make it right.</p>
+                <p className="text-black/70 text-sm">100% satisfaction guaranteed. If you&apos;re not happy, we&apos;ll make it right.</p>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-2xl border-2 border-black">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Personal Touch</h3>
-                <p className="text-white/70 text-sm">Real people, real care. Questions? We respond personally — not a call center.</p>
+                <p className="text-black/70 text-sm">Real people, real care. Questions? We respond personally — not a call center.</p>
               </div>
             </div>
           </div>
@@ -534,13 +531,13 @@ export default async function Home() {
       </section>
 
       {/* Volume Pricing Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-royal text-white">
+      <section className="py-20 bg-white text-black border-t-2 border-black">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Volume Discounts That Add Up
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
+            <p className="text-black/70 max-w-2xl mx-auto">
               The more you order, the more you save. No coupon codes needed.
             </p>
           </div>
@@ -553,10 +550,10 @@ export default async function Home() {
               { qty: "96+", perk: "$3 Off/Hat", desc: "Company orders" },
               { qty: "188+", perk: "$4 Off/Hat", desc: "Max savings" },
             ].map((tier) => (
-              <div key={tier.qty} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20">
-                <p className="text-2xl font-bold text-pink">{tier.qty}</p>
-                <p className="font-semibold">{tier.perk}</p>
-                <p className="text-xs text-white/60">{tier.desc}</p>
+              <div key={tier.qty} className="bg-yellow rounded-xl p-4 text-center border-2 border-black">
+                <p className="text-2xl font-bold text-black">{tier.qty}</p>
+                <p className="font-semibold text-black">{tier.perk}</p>
+                <p className="text-xs text-black/70">{tier.desc}</p>
               </div>
             ))}
           </div>
@@ -564,7 +561,7 @@ export default async function Home() {
           <div className="text-center mt-12">
             <Button 
               href="/order/hats" 
-              className="px-8 py-4 bg-accent hover:bg-accent-dark text-white"
+              className="px-8 py-4 bg-yellow hover:bg-yellow-dark text-black border-2 border-black"
             >
               Calculate Your Price
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -576,13 +573,13 @@ export default async function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-gradient-to-br from-magenta to-pink text-white scroll-mt-20">
+      <section id="faq" className="py-20 bg-yellow text-black scroll-mt-20 border-t-2 border-black">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-white/70">
+            <p className="text-black/70">
               Got questions? We&apos;ve got answers.
             </p>
           </div>
@@ -591,15 +588,15 @@ export default async function Home() {
             {faqs.map((faq, index) => (
               <details 
                 key={index} 
-                className="group bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 overflow-hidden"
+                className="group bg-white rounded-xl border-2 border-black overflow-hidden"
               >
                 <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                  <span className="font-semibold pr-4">{faq.question}</span>
-                  <svg className="w-5 h-5 text-white/60 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="font-semibold pr-4 text-black">{faq.question}</span>
+                  <svg className="w-5 h-5 text-black group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
-                <div className="px-6 pb-6 text-white/80">
+                <div className="px-6 pb-6 text-black/80">
                   {faq.answer}
                 </div>
               </details>
@@ -607,19 +604,19 @@ export default async function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-white/70 mb-4">Still have questions?</p>
-            <a href="mailto:support@custombusinesshats.com" className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors font-medium">
+            <p className="text-black/70 mb-4">Still have questions?</p>
+            <a href="mailto:sales@meanmuleapparel.com" className="inline-flex items-center gap-2 text-black hover:text-black/80 transition-colors font-medium border-b-2 border-black">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              support@custombusinesshats.com
+              sales@meanmuleapparel.com
             </a>
           </div>
         </div>
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-royal to-primary text-white">
+      <section className="py-20 bg-black text-white border-t-2 border-yellow">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Ready to Get Started?
@@ -628,7 +625,7 @@ export default async function Home() {
             Join hundreds of businesses who trust Custom Business Hats for their team apparel. No minimums, no hassle.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button href="/order/hats" className="text-lg px-8 py-4 bg-accent hover:bg-accent-dark">
+            <Button href="/order/hats" className="text-lg px-8 py-4 bg-yellow hover:bg-yellow-dark text-black border-2 border-yellow">
               Start Your Order
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -636,7 +633,7 @@ export default async function Home() {
             </Button>
             <Link 
               href="#how-it-works"
-              className="text-white/80 hover:text-white transition-colors font-medium"
+              className="text-yellow hover:text-yellow-light transition-colors font-medium"
             >
               Learn how it works →
             </Link>
