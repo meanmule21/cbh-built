@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  // Exclude nested cbh-built-main directory from compilation
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   // Note: ESLint config moved to eslint.config.mjs (Next.js 16+)
 };
 
