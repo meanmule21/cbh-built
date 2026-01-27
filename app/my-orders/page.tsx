@@ -333,7 +333,7 @@ export default function MyOrdersPage() {
             </div>
 
             {/* Reorder CTA */}
-            <div className="bg-gradient-to-r from-primary to-royal rounded-xl p-6 text-white text-center">
+            <div className="bg-gradient-to-r from-primary to-secondary rounded-xl p-6 text-white text-center">
               <h3 className="text-xl font-bold mb-2">Ready to Order More Hats?</h3>
               <p className="opacity-90 mb-4">
                 {customer.has_setup_fee_paid 

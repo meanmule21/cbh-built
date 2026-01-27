@@ -76,7 +76,7 @@ export default function CartSummary({ showActions = true }: CartSummaryProps) {
                   {showActions && (
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-magenta hover:text-accent-dark text-xs flex-shrink-0"
+                      className="text-accent-dark hover:text-accent text-xs flex-shrink-0"
                     >
                       ×
                     </button>

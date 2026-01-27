@@ -42,7 +42,7 @@ export default function StepIndicator() {
                     isActive
                       ? "bg-primary text-white shadow-md"
                       : isCompleted
-                      ? "bg-pink/20 text-primary hover:bg-pink/30"
+                      ? "bg-accent/20 text-primary hover:bg-accent/30"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
                 >

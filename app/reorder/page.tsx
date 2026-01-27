@@ -88,8 +88,8 @@ export default function ReorderPage() {
               </div>
 
               {error && (
-                <div className="p-4 bg-pink/10 border border-pink/20 rounded-lg">
-                  <p className="text-sm text-magenta">{error}</p>
+                <div className="p-4 bg-accent/10 border border-accent/20 rounded-lg">
+                  <p className="text-sm text-accent-dark">{error}</p>
                 </div>
               )}
 

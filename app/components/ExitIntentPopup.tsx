@@ -54,7 +54,7 @@ export default function ExitIntentPopup() {
         </button>
 
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-royal px-6 py-8 text-center">
+        <div className="bg-gradient-to-r from-primary to-secondary px-6 py-8 text-center">
           <div className="text-4xl mb-2">🎩</div>
           <h2 className="text-2xl font-bold text-white mb-2">
             Wait! Don&apos;t Leave Empty-Handed
@@ -66,10 +66,10 @@ export default function ExitIntentPopup() {
 
         {/* Content */}
         <div className="px-6 py-6">
-          <div className="bg-gradient-to-r from-pink/10 to-magenta/10 border border-pink/20 rounded-xl p-4 mb-6 text-center">
+          <div className="bg-gradient-to-r from-accent/10 to-accent-dark/10 border border-accent/20 rounded-xl p-4 mb-6 text-center">
             <p className="text-sm text-gray-600 mb-1">Use code at checkout:</p>
             <p className="text-2xl font-bold text-primary tracking-wider">WELCOME10</p>
-            <p className="text-pink font-semibold mt-1">10% OFF Your First Order</p>
+            <p className="text-accent-dark font-semibold mt-1">10% OFF Your First Order</p>
           </div>
 
           <div className="space-y-3">

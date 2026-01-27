@@ -20,7 +20,7 @@ export default function Footer() {
             </p>
             {/* Contact Info */}
             <div className="space-y-2 text-sm">
-              <a href="mailto:sales@meanmuleapparel.com" className="flex items-center gap-2 text-white/70 hover:text-pink transition-colors">
+              <a href="mailto:sales@meanmuleapparel.com" className="flex items-center gap-2 text-white/70 hover:text-accent transition-colors">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -34,22 +34,22 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/order/hats" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/order/hats" className="text-white/70 hover:text-accent transition-colors">
                   Start New Order
                 </Link>
               </li>
               <li>
-                <Link href="/reorder" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/reorder" className="text-white/70 hover:text-accent transition-colors">
                   Reorder
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/#faq" className="text-white/70 hover:text-accent transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/#how-it-works" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/#how-it-works" className="text-white/70 hover:text-accent transition-colors">
                   How It Works
                 </Link>
               </li>
@@ -61,17 +61,17 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Policies</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/returns" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/returns" className="text-white/70 hover:text-accent transition-colors">
                   Return Policy
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/privacy" className="text-white/70 hover:text-accent transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-white/70 hover:text-pink transition-colors">
+                <Link href="/terms" className="text-white/70 hover:text-accent transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -83,19 +83,19 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Our Guarantee</h3>
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-pink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-white/70">100% Satisfaction Guaranteed</span>
               </div>
               <div className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-pink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-white/70">Free Artwork Proofs</span>
               </div>
               <div className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-pink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span className="text-white/70">No Hidden Fees</span>

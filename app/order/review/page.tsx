@@ -107,7 +107,7 @@ export default function ReviewPage() {
                         <span className="font-medium text-text">
                           {extraLocationLabels[loc]}
                         </span>
-                        <span className="text-pink text-sm">
+                        <span className="text-accent-dark text-sm">
                           (+${EXTRA_LOCATION_PRICE}/hat)
                         </span>
                       </div>

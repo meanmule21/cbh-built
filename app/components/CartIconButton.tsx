@@ -35,7 +35,7 @@ export default function CartIconButton() {
 
       {/* Badge */}
       {totalItems > 0 && (
-        <span className="absolute -top-1 -right-1 bg-pink text-white text-xs font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1">
+        <span className="absolute -top-1 -right-1 bg-accent text-black text-xs font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1">
           {totalItems > 99 ? "99+" : totalItems}
         </span>
       )}

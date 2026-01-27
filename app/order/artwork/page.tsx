@@ -136,13 +136,13 @@ export default function ArtworkPage() {
                 <p className="font-medium text-text">3D Puff Embroidery</p>
                 <p className="text-sm text-gray-500">Raised, textured look for bold designs</p>
               </div>
-              <span className="text-pink font-semibold">+${puffPricePerHat}/hat</span>
+              <span className="text-accent-dark font-semibold">+${puffPricePerHat}/hat</span>
             </label>
           </div>
           
           {/* 3D Puff pricing breakdown */}
           {embroideryOptions.type === "puff" && totalHats > 0 && (
-            <div className="mt-4 p-4 bg-pink/10 rounded-lg">
+            <div className="mt-4 p-4 bg-accent/10 rounded-lg">
               <p className="text-primary font-medium">
                 3D Puff cost: ${puffTotalCost.toFixed(2)}
                 <span className="text-sm font-normal text-gray-600 ml-2">
@@ -179,9 +179,9 @@ export default function ArtworkPage() {
         </div>
 
         {/* Front Location */}
-        <div className={`bg-white rounded-xl shadow-sm border p-6 ${!hasFrontLocation ? 'border-pink/50' : 'border-gray-100'}`}>
+        <div className={`bg-white rounded-xl shadow-sm border p-6 ${!hasFrontLocation ? 'border-accent/50' : 'border-gray-100'}`}>
           <h2 className="text-lg font-semibold text-text mb-4">
-            Front Embroidery Location <span className="text-pink">*</span>
+            Front Embroidery Location <span className="text-accent-dark">*</span>
           </h2>
           <p className="text-sm text-gray-500 mb-4">Choose where your main logo will be placed</p>
           <div className="space-y-3">
@@ -209,9 +209,9 @@ export default function ArtworkPage() {
         </div>
 
         {/* Upload Artwork (Main Logo) */}
-        <div className={`bg-white rounded-xl shadow-sm border p-6 ${!hasArtwork ? 'border-pink/50' : 'border-gray-100'}`}>
+        <div className={`bg-white rounded-xl shadow-sm border p-6 ${!hasArtwork ? 'border-accent/50' : 'border-gray-100'}`}>
           <h2 className="text-lg font-semibold text-text mb-4">
-            Upload Artwork <span className="text-pink">*</span>
+            Upload Artwork <span className="text-accent-dark">*</span>
           </h2>
           <p className="text-sm text-gray-500 mb-4">
             Upload your logo or artwork file. Accepted formats: JPG, PNG, SVG, PDF
@@ -274,7 +274,7 @@ export default function ArtworkPage() {
                 </div>
                 <button
                   onClick={handleRemoveFile}
-                  className="p-2 text-magenta hover:bg-pink/10 rounded-lg transition-colors"
+                  className="p-2 text-accent-dark hover:bg-accent/10 rounded-lg transition-colors"
                 >
                   <svg
                     className="w-5 h-5"
@@ -346,12 +346,12 @@ export default function ArtworkPage() {
                   />
                   <span className="font-medium text-text">{option.label}</span>
                 </div>
-                <span className="text-pink font-medium">+${EXTRA_LOCATION_PRICE}/hat</span>
+                <span className="text-accent-dark font-medium">+${EXTRA_LOCATION_PRICE}/hat</span>
               </label>
             ))}
           </div>
           {embroideryOptions.extraLocations.length > 0 && totalHats > 0 && (
-            <div className="mt-4 p-4 bg-pink/10 rounded-lg">
+            <div className="mt-4 p-4 bg-accent/10 rounded-lg">
               <p className="text-primary font-medium">
                 Extra embroidery cost: ${extraLocationCost.toFixed(2)}
                 <span className="text-sm font-normal text-gray-600 ml-2">
@@ -426,7 +426,7 @@ export default function ArtworkPage() {
                 </div>
                 <button
                   onClick={handleRemoveAdditionalFile}
-                  className="p-2 text-magenta hover:bg-pink/10 rounded-lg transition-colors"
+                  className="p-2 text-accent-dark hover:bg-accent/10 rounded-lg transition-colors"
                 >
                   <svg
                     className="w-5 h-5"

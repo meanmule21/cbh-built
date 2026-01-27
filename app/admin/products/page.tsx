@@ -177,7 +177,7 @@ export default function AdminProductsPage() {
                   </div>
                   <button
                     onClick={() => loadStyles(product)}
-                    className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-magenta transition-colors text-sm"
+                    className="px-4 py-2 bg-accent text-black rounded-lg hover:bg-accent-dark transition-colors text-sm"
                   >
                     View Colors →
                   </button>

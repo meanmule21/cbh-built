@@ -1,37 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  /* CBH Brand Colors - Black & Yellow Theme */
+  /* CBH Brand Colors - Premium Black, Yellow & Grey Theme */
   --white: #FFFFFF;
   --black: #000000;
-  --yellow: #FFD700;
-  --yellow-dark: #FFA500;
-  --yellow-light: #FFEB3B;
+  --dark-grey: #2D2D2D;
+  --dark-grey-light: #3A3A3A;
+  --dark-grey-dark: #1F1F1F;
+  --grey: #4A4A4A;
+  --grey-light: #6B6B6B;
+  --grey-lighter: #E5E5E5;
   
-  /* UI Aliases */
+  /* Refined Yellow Palette */
+  --yellow: #FFC107;
+  --yellow-dark: #FF8F00;
+  --yellow-light: #FFD54F;
+  --yellow-bright: #FFEB3B;
+  
+  /* UI Semantic Colors */
   --primary: #000000;
-  --secondary: #1a1a1a;
-  --accent: #FFD700;
-  --accent-dark: #FFA500;
-  --background: #FFFFFF;
-  --text: #000000;
+  --secondary: #2D2D2D;
+  --accent: #FFC107;
+  --accent-dark: #FF8F00;
+  --accent-hover: #FFD54F;
+  --background: #2D2D2D;
+  --background-alt: #1F1F1F;
+  --card-bg: #000000;
+  --text: #FFFFFF;
+  --text-primary: #FFC107;
+  --text-secondary: #FFFFFF;
+  --text-muted: #FFD54F;
+  --border: #3A3A3A;
+  --border-dark: #1F1F1F;
 }
 
 @theme inline {
-  /* CBH Brand Colors - Black & Yellow Theme */
+  /* CBH Brand Colors - Premium Black, Yellow & Grey Theme */
   --color-white: var(--white);
   --color-black: var(--black);
+  --color-dark-grey: var(--dark-grey);
+  --color-dark-grey-light: var(--dark-grey-light);
+  --color-dark-grey-dark: var(--dark-grey-dark);
+  --color-grey: var(--grey);
+  --color-grey-light: var(--grey-light);
+  --color-grey-lighter: var(--grey-lighter);
+  
+  /* Yellow Palette */
   --color-yellow: var(--yellow);
   --color-yellow-dark: var(--yellow-dark);
   --color-yellow-light: var(--yellow-light);
+  --color-yellow-bright: var(--yellow-bright);
   
   /* UI Semantic Colors */
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-accent-dark: var(--accent-dark);
+  --color-accent-hover: var(--accent-hover);
   --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-card-bg: var(--card-bg);
   --color-text: var(--text);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-dark: var(--border-dark);
   
   /* Fonts */
   --font-sans: var(--font-geist-sans);
@@ -51,17 +85,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--dark-grey);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--yellow);
+  background: var(--accent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--yellow-dark);
+  background: var(--accent-dark);
 }
 
 /* Focus styles */
@@ -72,6 +106,35 @@ body {
 
 /* Selection styles */
 ::selection {
-  background-color: var(--yellow);
+  background-color: var(--accent);
   color: var(--black);
+}
+
+/* Dark theme base styles */
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* Card/Box styling */
+.card, .bg-white {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* Additional utility classes for better color combinations */
+.bg-gradient-brand {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, var(--black) 0%, var(--dark-grey) 100%);
+}
+
+.text-gradient-yellow {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

@@ -59,9 +59,41 @@ export default function SuccessContent() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Payment processing is currently unavailable - show generic success message
-    setLoading(false);
-    // Don't try to fetch order details since API is not available
+    if (!sessionId) {
+      setError("No session ID provided");
+      setLoading(false);
+      return;
+    }
+
+    // Fetch order details from Stripe
+    const fetchOrderDetails = async () => {
+      try {
+        const response = await fetch(`/api/checkout/session/verify?session_id=${sessionId}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to fetch order details");
+        }
+
+        // Parse extra locations from metadata
+        if (data.metadata?.extraLocations) {
+          try {
+            data.metadata.extraLocations = JSON.parse(data.metadata.extraLocations);
+          } catch {
+            // If parsing fails, keep as string
+          }
+        }
+
+        setOrderDetails(data);
+      } catch (err) {
+        console.error("Error fetching order details:", err);
+        setError(err instanceof Error ? err.message : "Failed to load order details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrderDetails();
   }, [sessionId]);
 
   const formatCurrency = (amount: number) => {
@@ -174,12 +206,15 @@ export default function SuccessContent() {
                     <span className="font-medium">Front Location:</span>{" "}
                     {frontLocationLabels[orderDetails.metadata.frontLocation] || orderDetails.metadata.frontLocation}
                   </p>
-                  {orderDetails.metadata.extraLocations && orderDetails.metadata.extraLocations !== "" && (
+                  {orderDetails.metadata.extraLocations && 
+                   orderDetails.metadata.extraLocations !== "" && (
                     <p>
                       <span className="font-medium">Extra Locations:</span>{" "}
-                      {orderDetails.metadata.extraLocations
-                        .split(",")
-                        .map((loc) => extraLocationLabels[loc] || loc)
+                      {(Array.isArray(orderDetails.metadata.extraLocations)
+                        ? orderDetails.metadata.extraLocations
+                        : orderDetails.metadata.extraLocations.split(",")
+                      )
+                        .map((loc: string) => extraLocationLabels[loc] || loc)
                         .join(", ")}
                     </p>
                   )}

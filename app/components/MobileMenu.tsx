@@ -32,21 +32,21 @@ export default function MobileMenu() {
             <a
               href="#about"
               onClick={() => setIsOpen(false)}
-              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-pink transition-colors font-medium"
+              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-accent transition-colors font-medium"
             >
               About Us
             </a>
             <a
               href="#faq"
               onClick={() => setIsOpen(false)}
-              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-pink transition-colors font-medium"
+              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-accent transition-colors font-medium"
             >
               FAQ
             </a>
             <Link
               href="/reorder"
               onClick={() => setIsOpen(false)}
-              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-pink transition-colors font-medium"
+              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-accent transition-colors font-medium"
             >
               Customer Login
             </Link>
@@ -54,7 +54,7 @@ export default function MobileMenu() {
               <Link
                 href="/order/hats"
                 onClick={() => setIsOpen(false)}
-                className="mx-4 my-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-accent hover:bg-accent-dark text-white font-semibold transition-colors"
+                className="mx-4 my-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-accent hover:bg-accent-dark text-black font-semibold transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

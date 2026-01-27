@@ -83,7 +83,7 @@ export default function EmailSignupPopup() {
         {!isSubmitted ? (
           <>
             {/* Header */}
-            <div className="bg-gradient-to-r from-primary to-royal px-6 py-8 text-center">
+            <div className="bg-gradient-to-r from-primary to-secondary px-6 py-8 text-center">
               <div className="text-4xl mb-3">🎁</div>
               <h2 className="text-2xl font-bold text-white mb-2">
                 Get 10% Off Your First Order
@@ -148,9 +148,9 @@ export default function EmailSignupPopup() {
             <p className="text-gray-600 mb-4">
               Check your email for your discount code:
             </p>
-            <div className="bg-gradient-to-r from-pink/10 to-magenta/10 border border-pink/20 rounded-xl p-4 mb-4">
+            <div className="bg-gradient-to-r from-accent/10 to-accent-dark/10 border border-accent/20 rounded-xl p-4 mb-4">
               <p className="text-2xl font-bold text-primary tracking-wider">WELCOME10</p>
-              <p className="text-pink font-semibold mt-1">10% OFF Your First Order</p>
+              <p className="text-accent-dark font-semibold mt-1">10% OFF Your First Order</p>
             </div>
             <p className="text-sm text-gray-500">
               Redirecting you back...
