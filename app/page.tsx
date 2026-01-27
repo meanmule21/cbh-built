@@ -449,12 +449,12 @@ export default async function Home() {
 
           {/* Family Story */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            {/* Family Photo - Add your image to /public/family/ folder */}
+            {/* Meet Our Family - Road imagery */}
             <div className="rounded-2xl bg-black border-2 border-yellow overflow-hidden">
               <FamilyPhoto 
                 src="/family/family.jpg.png" 
-                alt="Custom Business Hats Family - Our team behind every custom embroidered hat" 
-                placeholder="Add family.jpg"
+                alt="The road we travel - Mean Mule Apparel journey" 
+                placeholder=""
               />
             </div>
 
