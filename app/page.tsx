@@ -258,7 +258,7 @@ export default async function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
               <Button
                 href="/order/hats"
-                className="text-lg px-8 py-4 bg-yellow hover:bg-yellow-dark text-black shadow-lg shadow-yellow/30 hover:shadow-xl hover:shadow-yellow/40 hover:scale-105"
+                className="text-lg px-8 py-4 bg-yellow hover:bg-yellow-dark !text-black hover:!text-black shadow-lg shadow-yellow/30 hover:shadow-xl hover:shadow-yellow/40 hover:scale-105"
               >
                 Start Your Order
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -268,7 +268,7 @@ export default async function Home() {
               <Button
                 href="/reorder"
                 variant="outline"
-                className="text-lg px-8 py-4 border-2 border-black text-black hover:bg-yellow"
+                className="text-lg px-8 py-4 border-2 border-white text-white hover:bg-yellow hover:text-black hover:border-yellow"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -388,8 +388,8 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="relative text-center">
-              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-yellow">
-                <span className="text-2xl font-bold text-yellow">1</span>
+              <div className="w-16 h-16 bg-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-black">
+                <span className="text-2xl font-bold text-black">1</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-white">Choose Your Hats</h3>
               <p className="text-yellow/80">
@@ -404,8 +404,8 @@ export default async function Home() {
               <div className="w-16 h-16 bg-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-black">
                 <span className="text-2xl font-bold text-black">2</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Upload Your Logo</h3>
-              <p className="text-black/70">
+              <h3 className="text-xl font-semibold mb-3 text-white">Upload Your Logo</h3>
+              <p className="text-yellow/80">
                 Upload your artwork and choose embroidery options. We&apos;ll send a free proof for approval.
               </p>
               {/* Connector line */}
@@ -417,15 +417,15 @@ export default async function Home() {
               <div className="w-16 h-16 bg-yellow rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg border-2 border-black">
                 <span className="text-2xl font-bold text-black">3</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">We Stitch & Ship</h3>
-              <p className="text-black/70">
+              <h3 className="text-xl font-semibold mb-3 text-white">We Stitch & Ship</h3>
+              <p className="text-yellow/80">
                 Our team embroiders your hats with precision. Ships in 10-15 business days, right to your door.
               </p>
             </div>
           </div>
 
           <div className="text-center mt-12">
-            <Button href="/order/hats" className="px-8 py-4 bg-yellow hover:bg-yellow-dark text-black">
+            <Button href="/order/hats" className="px-8 py-4 bg-yellow hover:bg-yellow-dark !text-black hover:!text-black">
               Start Your Order Now
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -460,24 +460,24 @@ export default async function Home() {
 
             {/* Story Text */}
             <div className="space-y-6">
-              <h3 className="text-2xl sm:text-3xl font-bold">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white">
                 A Family Business Built on Quality & Trust
               </h3>
-              <p className="text-black/80 text-lg leading-relaxed">
-                What started as a small side project in our garage has grown into something 
+              <p className="text-yellow/90 text-lg leading-relaxed">
+                What started as a small side project in our shop has grown into something 
                 we&apos;re truly proud of. We&apos;re not a massive corporation — we&apos;re a family 
                 that genuinely cares about every single hat that leaves our shop.
               </p>
               <p className="text-yellow/90 text-lg leading-relaxed">
-                When you order from Custom Business Hats, you&apos;re not just getting a product. 
+                When you order from Mean Mule Apparel, you&apos;re not just getting a product. 
                 You&apos;re getting our personal commitment to quality. We inspect every stitch, 
                 we pack every box with care, and we treat your business like it&apos;s our own.
               </p>
               <p className="text-yellow/90 text-lg leading-relaxed">
                 Thank you for trusting us with your brand. It means more than you know.
               </p>
-              <p className="text-xl font-semibold text-white italic">
-                — The Custom Business Hats Family
+              <p className="text-xl font-semibold text-yellow/90 italic">
+                — The Mean Mule Family
               </p>
             </div>
           </div>
@@ -496,34 +496,34 @@ export default async function Home() {
                 <p className="text-white/80 text-sm">Order 1 hat or 1,000. Volume discounts available but never required.</p>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border-2 border-black">
-                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+              <div className="bg-black p-6 rounded-2xl border-2 border-yellow">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-yellow">
                   <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Fast Turnaround</h3>
-                <p className="text-black/70 text-sm">10-15 business days standard. Rush options available when you need it faster.</p>
+                <h3 className="text-lg font-semibold mb-2 text-yellow">Fast Turnaround</h3>
+                <p className="text-white/80 text-sm">10-15 business days standard. Rush options available when you need it faster.</p>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border-2 border-black">
-                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+              <div className="bg-black p-6 rounded-2xl border-2 border-yellow">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-yellow">
                   <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Quality Guarantee</h3>
-                <p className="text-black/70 text-sm">100% satisfaction guaranteed. If you&apos;re not happy, we&apos;ll make it right.</p>
+                <h3 className="text-lg font-semibold mb-2 text-yellow">Quality Guarantee</h3>
+                <p className="text-white/80 text-sm">100% satisfaction guaranteed. If you&apos;re not happy, we&apos;ll make it right.</p>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border-2 border-black">
-                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-black">
+              <div className="bg-black p-6 rounded-2xl border-2 border-yellow">
+                <div className="w-12 h-12 bg-yellow rounded-xl flex items-center justify-center mb-4 border-2 border-yellow">
                   <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Personal Touch</h3>
-                <p className="text-black/70 text-sm">Real people, real care. Questions? We respond personally — not a call center.</p>
+                <h3 className="text-lg font-semibold mb-2 text-yellow">Personal Touch</h3>
+                <p className="text-white/80 text-sm">Real people, real care. Questions? We respond personally — not a call center.</p>
               </div>
             </div>
           </div>
@@ -561,7 +561,7 @@ export default async function Home() {
           <div className="text-center mt-12">
             <Button 
               href="/order/hats" 
-              className="px-8 py-4 bg-yellow hover:bg-yellow-dark text-black border-2 border-black"
+              className="px-8 py-4 bg-yellow hover:bg-yellow-dark !text-black hover:!text-black border-2 border-black"
             >
               Calculate Your Price
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -625,7 +625,7 @@ export default async function Home() {
             Join hundreds of businesses who trust Custom Business Hats for their team apparel. No minimums, no hassle.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button href="/order/hats" className="text-lg px-8 py-4 bg-yellow hover:bg-yellow-dark text-black border-2 border-yellow">
+            <Button href="/order/hats" className="text-lg px-8 py-4 bg-yellow hover:bg-yellow-dark !text-black hover:!text-black border-2 border-yellow">
               Start Your Order
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
