@@ -30,15 +30,15 @@ if (-not (Test-Path "node_modules\next")) {
     Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Yellow
     npm install
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "`n❌ npm install failed. You may need to:" -ForegroundColor Red
+        Write-Host "`nnpm install failed. You may need to:" -ForegroundColor Red
         Write-Host "   1. Remove proxy settings from System Environment Variables" -ForegroundColor Yellow
         Write-Host "   2. Press Win+R, type 'sysdm.cpl', press Enter" -ForegroundColor Yellow
-        Write-Host "   3. Go to Advanced → Environment Variables" -ForegroundColor Yellow
+        Write-Host "   3. Go to Advanced -> Environment Variables" -ForegroundColor Yellow
         Write-Host "   4. Remove HTTP_PROXY, HTTPS_PROXY from User/System variables" -ForegroundColor Yellow
         exit 1
     }
 } else {
-    Write-Host "✅ Dependencies already installed" -ForegroundColor Green
+    Write-Host "Dependencies already installed" -ForegroundColor Green
 }
 
 Write-Host "`nStarting development server..." -ForegroundColor Cyan

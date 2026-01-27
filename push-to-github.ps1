@@ -1,59 +1,39 @@
-# Push to GitHub Helper Script
-# This script helps push your code to GitHub with proper authentication
+# Script to push to GitHub bypassing proxy settings
+# Run this script: .\push-to-github.ps1
 
-Write-Host "GitHub Push Helper" -ForegroundColor Cyan
-Write-Host "===================" -ForegroundColor Cyan
+Write-Host "Configuring git to bypass proxy..." -ForegroundColor Yellow
 
-# Set NO_PROXY for GitHub
-$env:NO_PROXY = "github.com,*.github.com,*.githubusercontent.com"
+# Unset proxy environment variables for this session
+$env:HTTP_PROXY = $null
+$env:HTTPS_PROXY = $null
+$env:http_proxy = $null
+$env:https_proxy = $null
 
-# Check current status
-Write-Host "`nChecking git status..." -ForegroundColor Yellow
-git status
+# Configure git to not use proxy
+git config --global http.proxy ""
+git config --global https.proxy ""
+git config --global http.https://github.com.proxy ""
 
-# Check if there are commits to push
-$commitsAhead = git rev-list --count origin/main..HEAD 2>$null
-if ($commitsAhead -eq 0) {
-    Write-Host "`n✅ No commits to push. Everything is up to date." -ForegroundColor Green
-    exit 0
-}
+Write-Host "Attempting to push to GitHub..." -ForegroundColor Green
 
-Write-Host "`nYou have $commitsAhead commit(s) to push." -ForegroundColor Yellow
-
-# Check remote URL
-$remoteUrl = git remote get-url origin
-Write-Host "`nRemote URL: $remoteUrl" -ForegroundColor Cyan
-
-if ($remoteUrl -like "*https://*") {
-    Write-Host "`n⚠️  Using HTTPS - Authentication required" -ForegroundColor Yellow
-    Write-Host "`nOptions:" -ForegroundColor White
-    Write-Host "1. Use GitHub Personal Access Token" -ForegroundColor White
-    Write-Host "2. Switch to SSH (recommended)" -ForegroundColor White
-    Write-Host "3. Use GitHub Desktop or another Git client" -ForegroundColor White
-    
-    Write-Host "`nTrying to push with current credentials..." -ForegroundColor Yellow
-    git push origin main
-    
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "`n❌ Push failed. Authentication required." -ForegroundColor Red
-        Write-Host "`nTo fix this:" -ForegroundColor Yellow
-        Write-Host "1. Generate a Personal Access Token:" -ForegroundColor White
-        Write-Host "   - Go to: https://github.com/settings/tokens" -ForegroundColor White
-        Write-Host "   - Click 'Generate new token (classic)'" -ForegroundColor White
-        Write-Host "   - Select 'repo' scope" -ForegroundColor White
-        Write-Host "   - Copy the token" -ForegroundColor White
-        Write-Host "`n2. When prompted for password, paste the token" -ForegroundColor White
-        Write-Host "`nOR switch to SSH:" -ForegroundColor Yellow
-        Write-Host "   git remote set-url origin git@github.com:meanmule21/cbh-built.git" -ForegroundColor White
-    }
-} else {
-    Write-Host "`nUsing SSH - attempting push..." -ForegroundColor Yellow
-    git push origin main
-}
+# Try to push
+git push origin main
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "`n✅ Successfully pushed to GitHub!" -ForegroundColor Green
-    Write-Host "`nYour code is now on GitHub and ready for Vercel deployment." -ForegroundColor Green
+    Write-Host "`nSuccessfully pushed to GitHub!" -ForegroundColor Green
 } else {
-    Write-Host "`n❌ Push failed. Error code: $LASTEXITCODE" -ForegroundColor Red
+    Write-Host "`nPush failed. Trying alternative method..." -ForegroundColor Yellow
+    
+    # Alternative: Try with NO_PROXY set
+    $env:NO_PROXY = "*"
+    git push origin main
+    
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "`nSuccessfully pushed to GitHub!" -ForegroundColor Green
+    } else {
+        Write-Host "`nPush still failed. Please check:" -ForegroundColor Red
+        Write-Host "1. Your internet connection" -ForegroundColor Red
+        Write-Host "2. GitHub token in remote URL (might be expired)" -ForegroundColor Red
+        Write-Host "3. Try running: git push origin main manually" -ForegroundColor Red
+    }
 }

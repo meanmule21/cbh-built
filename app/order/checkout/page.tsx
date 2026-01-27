@@ -45,75 +45,9 @@ export default function CheckoutPage() {
   } = totals;
   const totalHats = getTotalHatCount();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handlePayNow = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // Prepare order data for Stripe
-      const orderData = {
-        cartItems: cartItems.map(item => ({
-          ...item,
-          discountPerHat: discountPerHat,
-        })),
-        embroideryOptions: {
-          type: embroideryOptions.type,
-          frontLocation: embroideryOptions.frontLocation,
-          extraLocations: embroideryOptions.extraLocations,
-          artworkSetupFee: artworkSetupFee,
-          puffTotal: puffEmbroideryTotal,
-          extraTotal: extraEmbroideryTotal,
-        },
-        customerInfo: customerInfo,
-        orderTotal: orderTotal,
-        artworkFileName: artworkFileName,
-        specialInstructions: specialInstructions || "",
-      };
-
-      // Create Stripe checkout session
-      const response = await fetch("/api/checkout/session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create checkout session");
-      }
-
-      // Redirect to Stripe Checkout
-      if (data.sessionId) {
-        const { loadStripe } = await import("@stripe/stripe-js");
-        const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-        
-        if (!publishableKey) {
-          throw new Error("Stripe publishable key is not configured");
-        }
-
-        const stripe = await loadStripe(publishableKey);
-        if (stripe) {
-          const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
-          if (error) {
-            throw new Error(error.message);
-          }
-        } else {
-          throw new Error("Failed to load Stripe");
-        }
-      } else {
-        throw new Error("No session ID returned");
-      }
-    } catch (err) {
-      console.error("Checkout error:", err);
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
-      setIsLoading(false);
-    }
+  const handleSubmitOrder = () => {
+    // Order will be processed manually - redirect to success page
+    window.location.href = "/order/success";
   };
 
   const totalSavings = volumeDiscount + (artworkSetupWaived ? ARTWORK_SETUP_FEE : 0) + rewardsDiscount;
@@ -259,43 +193,27 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Payment Section */}
+        {/* Submit Order Section */}
         <div className="bg-black rounded-xl shadow-sm border border-yellow/30 overflow-hidden">
           <div className="bg-gradient-to-r from-accent to-accent-dark px-6 py-4">
-            <h2 className="text-lg font-bold text-black">Payment</h2>
+            <h2 className="text-lg font-bold text-black">Submit Order</h2>
           </div>
           <div className="p-6">
             <p className="text-white/80 mb-6">
-              Click the button below to securely complete your payment. You&apos;ll be redirected to Stripe Checkout to enter your payment details.
+              Review your order details above. When you submit, we&apos;ll contact you to finalize payment and shipping details.
             </p>
 
-            {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4 text-center">
-                <p className="text-red-600">{error}</p>
-              </div>
-            )}
-
             <Button 
-              onClick={handlePayNow} 
+              onClick={handleSubmitOrder} 
               fullWidth 
               className="text-lg py-4"
-              disabled={isLoading || cartItems.length === 0}
+              disabled={cartItems.length === 0}
             >
-              {isLoading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  Processing...
-                </span>
-              ) : (
-                `Pay Now - $${orderTotal.toFixed(2)}`
-              )}
+              Submit Order - ${orderTotal.toFixed(2)}
             </Button>
 
             <p className="text-xs text-gray-500 text-center mt-3">
-              Secure payment powered by Stripe
+              You will be contacted to complete payment and shipping
             </p>
           </div>
         </div>

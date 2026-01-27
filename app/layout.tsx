@@ -186,8 +186,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {/* Favicon */}
-        <link rel="icon" type="image/png" href="/mean-mule-logo.png" />
-        <link rel="apple-touch-icon" href="/mean-mule-logo.png" />
+        <link rel="icon" type="image/png" href="/icon.png" />
+        <link rel="apple-touch-icon" href="/icon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dark-grey text-white`}
