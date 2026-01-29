@@ -54,12 +54,12 @@ export default function ReorderPage() {
             </p>
           </div>
 
-          {/* Lookup Form */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
-            <h2 className="text-lg font-semibold text-text mb-4">Find Your Order</h2>
+          {/* Lookup Form - dark card so email/order number labels and input text are white */}
+          <div className="bg-black rounded-xl shadow-sm border border-yellow/30 p-6 mb-6">
+            <h2 className="text-lg font-semibold text-white mb-4">Find Your Order</h2>
             <form onSubmit={handleLookup} className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
                   Email Address
                 </label>
                 <input
@@ -69,11 +69,11 @@ export default function ReorderPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-text placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow focus:border-transparent bg-dark-grey text-white placeholder:text-gray-400"
                 />
               </div>
               <div>
-                <label htmlFor="orderNumber" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="orderNumber" className="block text-sm font-medium text-white mb-1">
                   Order Number
                 </label>
                 <input
@@ -83,7 +83,7 @@ export default function ReorderPage() {
                   onChange={(e) => setOrderNumber(e.target.value)}
                   placeholder="CBH-12345"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-text placeholder:text-gray-400"
+                  className="w-full px-4 py-3 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow focus:border-transparent bg-dark-grey text-white placeholder:text-gray-400"
                 />
               </div>
 
@@ -110,45 +110,45 @@ export default function ReorderPage() {
             </div>
           )}
 
-          {/* Alternative Options */}
+          {/* Alternative Options - black boxes with white lettering */}
           <div className="bg-gray-50 rounded-xl p-6">
-            <h3 className="font-semibold text-text mb-3">Other Options</h3>
+            <h3 className="font-semibold text-black mb-3">Other Options</h3>
             <div className="space-y-3">
               <Link
                 href="/order/hats"
-                className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-primary/50 transition-colors group"
+                className="flex items-center gap-3 p-3 bg-black rounded-lg border border-yellow/30 hover:border-yellow/60 transition-colors group"
               >
-                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-yellow/20 rounded-lg flex items-center justify-center group-hover:bg-yellow/30 transition-colors">
+                  <svg className="w-5 h-5 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-text">Start New Order</p>
-                  <p className="text-sm text-gray-500">Build a fresh order from scratch</p>
+                  <p className="font-medium text-white">Start New Order</p>
+                  <p className="text-sm text-white/80">Build a fresh order from scratch</p>
                 </div>
               </Link>
               
               <a
                 href="mailto:sales@meanmuleapparel.com?subject=Reorder%20Request"
-                className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-primary/50 transition-colors group"
+                className="flex items-center gap-3 p-3 bg-black rounded-lg border border-yellow/30 hover:border-yellow/60 transition-colors group"
               >
-                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-yellow/20 rounded-lg flex items-center justify-center group-hover:bg-yellow/30 transition-colors">
+                  <svg className="w-5 h-5 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium text-text">Contact Us</p>
-                  <p className="text-sm text-gray-500">Email us your previous order details</p>
+                  <p className="font-medium text-white">Contact Us</p>
+                  <p className="text-sm text-white/80">Email us your previous order details</p>
                 </div>
               </a>
             </div>
           </div>
 
-          {/* Back Link */}
+          {/* Back Link - white lettering */}
           <div className="text-center mt-8">
-            <Link href="/" className="text-primary hover:text-secondary transition-colors">
+            <Link href="/" className="text-white hover:text-yellow transition-colors">
               ← Back to Home
             </Link>
           </div>
