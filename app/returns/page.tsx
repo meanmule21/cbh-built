@@ -22,10 +22,10 @@ export default function ReturnPolicyPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-primary mb-8">Return & Refund Policy</h1>
+        <h1 className="text-3xl font-bold text-white mb-8">Return & Refund Policy</h1>
         
-        <div className="prose prose-lg max-w-none space-y-6 text-text">
-          <p className="text-gray-600">
+        <div className="prose prose-lg max-w-none space-y-6 text-white">
+          <p className="text-white/90">
             <strong>Last Updated:</strong> November 2024
           </p>
 
@@ -43,8 +43,8 @@ export default function ReturnPolicyPage() {
           </div>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">Understanding Custom Products</h2>
-            <p>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">Understanding Custom Products</h2>
+            <p className="text-white">
               Because each order is custom-made specifically for you with your unique artwork and specifications, 
               our return policy differs from standard retail stores. Please review our policy carefully before 
               placing your order.
@@ -52,14 +52,14 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">When We Accept Returns</h2>
-            <p>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">When We Accept Returns</h2>
+            <p className="text-white">
               We will gladly accept returns and provide a full refund or replacement in the following situations:
             </p>
             
-            <div className="bg-white border border-gray-200 rounded-lg p-6 mt-4">
-              <h3 className="font-semibold text-primary mb-3">✓ Manufacturing Defects</h3>
-              <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <div className="bg-black border border-yellow/30 rounded-lg p-6 mt-4">
+              <h3 className="font-semibold text-yellow mb-3">✓ Manufacturing Defects</h3>
+              <ul className="list-disc pl-6 space-y-2 text-white">
                 <li>Embroidery errors (misspellings, incorrect design)</li>
                 <li>Thread breaks or loose stitching</li>
                 <li>Incorrect hat color or style sent</li>
@@ -67,9 +67,9 @@ export default function ReturnPolicyPage() {
               </ul>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-6 mt-4">
-              <h3 className="font-semibold text-primary mb-3">✓ Our Mistakes</h3>
-              <ul className="list-disc pl-6 space-y-2 text-gray-700">
+            <div className="bg-black border border-yellow/30 rounded-lg p-6 mt-4">
+              <h3 className="font-semibold text-yellow mb-3">✓ Our Mistakes</h3>
+              <ul className="list-disc pl-6 space-y-2 text-white">
                 <li>Wrong quantity shipped</li>
                 <li>Design placed in wrong location</li>
                 <li>Design does not match approved proof</li>
@@ -79,11 +79,11 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">When We Cannot Accept Returns</h2>
-            <p>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">When We Cannot Accept Returns</h2>
+            <p className="text-white">
               Due to the custom nature of our products, we cannot accept returns for:
             </p>
-            <ul className="list-disc pl-6 space-y-2">
+            <ul className="list-disc pl-6 space-y-2 text-white">
               <li>Change of mind or no longer needed</li>
               <li>Artwork issues that were approved by you in the proof</li>
               <li>Minor color variations (thread colors may vary slightly from screen displays)</li>
@@ -93,17 +93,17 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">How to Request a Return</h2>
-            <div className="bg-gray-50 rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">How to Request a Return</h2>
+            <div className="bg-white rounded-lg p-6 text-black">
               <ol className="list-decimal pl-6 space-y-4">
                 <li>
-                  <strong>Contact us within 7 days</strong> of receiving your order at{" "}
-                  <a href="mailto:sales@meanmuleapparel.com" className="text-accent hover:underline">
+                  <strong className="font-bold">Contact us within 7 days</strong> of receiving your order at{" "}
+                  <a href="mailto:sales@meanmuleapparel.com" className="text-black hover:underline font-medium">
                     sales@meanmuleapparel.com
                   </a>
                 </li>
                 <li>
-                  <strong>Include in your email:</strong>
+                  <strong className="font-bold">Include in your email:</strong>
                   <ul className="list-disc pl-6 mt-2 space-y-1">
                     <li>Your order number</li>
                     <li>Clear photos showing the issue</li>
@@ -111,10 +111,10 @@ export default function ReturnPolicyPage() {
                   </ul>
                 </li>
                 <li>
-                  <strong>Wait for our response.</strong> We typically respond within 1 business day.
+                  <strong className="font-bold">Wait for our response.</strong> We typically respond within 1 business day.
                 </li>
                 <li>
-                  <strong>If approved,</strong> we will either:
+                  <strong className="font-bold">If approved,</strong> we will either:
                   <ul className="list-disc pl-6 mt-2 space-y-1">
                     <li>Send replacement items at no charge</li>
                     <li>Issue a refund to your original payment method</li>
@@ -125,7 +125,7 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">Order Cancellations</h2>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">Order Cancellations</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                 <h3 className="font-semibold text-green-800 mb-2">Within 24 Hours</h3>
@@ -143,8 +143,8 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">Refund Processing</h2>
-            <ul className="list-disc pl-6 space-y-2">
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">Refund Processing</h2>
+            <ul className="list-disc pl-6 space-y-2 text-white">
               <li>Approved refunds are processed within 3-5 business days</li>
               <li>Refunds are issued to the original payment method</li>
               <li>It may take 5-10 business days for the refund to appear on your statement</li>
@@ -153,11 +153,11 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">Damaged During Shipping</h2>
-            <p>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">Damaged During Shipping</h2>
+            <p className="text-white">
               If your order arrives damaged due to shipping:
             </p>
-            <ul className="list-disc pl-6 space-y-2">
+            <ul className="list-disc pl-6 space-y-2 text-white">
               <li>Take photos of the damaged packaging and products immediately</li>
               <li>Contact us within 48 hours of delivery</li>
               <li>Keep all packaging materials for potential carrier claims</li>
@@ -166,18 +166,18 @@ export default function ReturnPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">Questions?</h2>
-            <p>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4">Questions?</h2>
+            <p className="text-white">
               We&apos;re here to help! If you have any questions about our return policy or need assistance 
               with an order, please don&apos;t hesitate to contact us:
             </p>
-            <p className="mt-4">
+            <p className="mt-4 text-white">
               <strong>Email:</strong>{" "}
-              <a href="mailto:sales@meanmuleapparel.com" className="text-accent hover:underline">
+              <a href="mailto:sales@meanmuleapparel.com" className="text-yellow hover:underline">
                 sales@meanmuleapparel.com
               </a>
             </p>
-            <p className="text-gray-600 mt-2">
+            <p className="text-white mt-2">
               We typically respond within 1 business day.
             </p>
           </section>
