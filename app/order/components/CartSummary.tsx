@@ -88,14 +88,14 @@ export default function CartSummary({ showActions = true }: CartSummaryProps) {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-6 h-6 flex items-center justify-center rounded bg-gray-100 hover:bg-gray-200 text-text font-medium text-xs"
+                        className="w-6 h-6 flex items-center justify-center rounded bg-gray-100 hover:bg-gray-200 text-black font-medium text-xs"
                       >
                         −
                       </button>
                       <span className="w-6 text-center font-medium text-xs">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-6 h-6 flex items-center justify-center rounded bg-gray-100 hover:bg-gray-200 text-text font-medium text-xs"
+                        className="w-6 h-6 flex items-center justify-center rounded bg-gray-100 hover:bg-gray-200 text-black font-medium text-xs"
                       >
                         +
                       </button>
@@ -105,13 +105,13 @@ export default function CartSummary({ showActions = true }: CartSummaryProps) {
                   )}
                   <div className="text-right">
                     {discountPerHat > 0 ? (
-                      <p className="font-semibold text-primary text-sm">
+                      <span className="inline-block font-semibold text-white text-sm bg-black px-2 py-0.5 rounded">
                         ${((item.unitPrice - discountPerHat) * item.quantity).toFixed(2)}
-                      </p>
+                      </span>
                     ) : (
-                      <p className="font-semibold text-primary text-sm">
+                      <span className="inline-block font-semibold text-white text-sm bg-black px-2 py-0.5 rounded">
                         ${(item.unitPrice * item.quantity).toFixed(2)}
-                      </p>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -121,61 +121,61 @@ export default function CartSummary({ showActions = true }: CartSummaryProps) {
         ))}
       </div>
 
-      {/* Price Breakdown */}
-      <div className="border-t border-gray-200 px-4 py-3 bg-gray-50 space-y-2">
+      {/* Price Breakdown - dark background, white dollar amounts */}
+      <div className="border-t border-gray-200 px-4 py-3 bg-black space-y-2">
         {/* Hat subtotal */}
         {volumeDiscount > 0 ? (
           <>
-            <div className="flex justify-between items-center text-xs text-gray-500">
+            <div className="flex justify-between items-center text-xs text-gray-400">
               <span>Hats ({totalItems})</span>
-              <span className="line-through">${hatSubtotal.toFixed(2)}</span>
+              <span className="line-through text-white">${hatSubtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between items-center text-xs text-green-600">
+            <div className="flex justify-between items-center text-xs text-green-400">
               <span>Volume Discount</span>
-              <span>-${volumeDiscount.toFixed(2)}</span>
+              <span className="text-white">-${volumeDiscount.toFixed(2)}</span>
             </div>
             <div className="flex justify-between items-center text-sm">
-              <span className="text-gray-700">Subtotal</span>
-              <span className="font-medium">${discountedHatSubtotal.toFixed(2)}</span>
+              <span className="text-gray-300">Subtotal</span>
+              <span className="font-medium text-white">${discountedHatSubtotal.toFixed(2)}</span>
             </div>
           </>
         ) : (
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-700">Hats ({totalItems})</span>
-            <span className="font-medium">${hatSubtotal.toFixed(2)}</span>
+            <span className="text-gray-300">Hats ({totalItems})</span>
+            <span className="font-medium text-white">${hatSubtotal.toFixed(2)}</span>
           </div>
         )}
 
         {/* 3D Puff Embroidery */}
         {embroideryOptions.type === "puff" && totalItems > 0 && (
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-700">3D Puff (${puffPricePerHat}/hat)</span>
-            <span className="font-medium">${puffEmbroideryTotal.toFixed(2)}</span>
+            <span className="text-gray-300">3D Puff (${puffPricePerHat}/hat)</span>
+            <span className="font-medium text-white">${puffEmbroideryTotal.toFixed(2)}</span>
           </div>
         )}
 
         {/* Artwork Setup Fee */}
         <div className="flex justify-between items-center text-sm">
-          <span className="text-gray-700">Artwork Setup</span>
+          <span className="text-gray-300">Artwork Setup</span>
           {artworkSetupWaived ? (
             <div className="flex items-center gap-2">
-              <span className="text-gray-400 line-through text-xs">${ARTWORK_SETUP_FEE.toFixed(2)}</span>
-              <span className="text-green-600 font-semibold">FREE</span>
+              <span className="text-gray-500 line-through text-xs">${ARTWORK_SETUP_FEE.toFixed(2)}</span>
+              <span className="text-green-400 font-semibold">FREE</span>
             </div>
           ) : (
-            <span className="font-medium">${artworkSetupFee.toFixed(2)}</span>
+            <span className="font-medium text-white">${artworkSetupFee.toFixed(2)}</span>
           )}
         </div>
         {!artworkSetupWaived && totalItems > 0 && (
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-500">
             Add {FREE_ARTWORK_THRESHOLD - totalItems} more for free setup
           </p>
         )}
 
         {/* Total */}
-        <div className="flex justify-between items-center pt-2 border-t border-gray-200">
-          <span className="font-semibold text-text">Total</span>
-          <span className="text-lg font-bold text-primary">${orderTotal.toFixed(2)}</span>
+        <div className="flex justify-between items-center pt-2 border-t border-gray-600">
+          <span className="font-semibold text-white">Total</span>
+          <span className="text-lg font-bold text-white">${orderTotal.toFixed(2)}</span>
         </div>
       </div>
 

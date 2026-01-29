@@ -539,9 +539,9 @@ function HatCard({ hat }: { hat: HatVariant }) {
         {hat.colorName}
       </p>
 
-      {/* Price row */}
+      {/* Price row - white text on dark pill */}
       <div className="flex items-baseline gap-1 mb-1">
-        <span className={`font-bold text-sm ${isOutOfStock ? "text-gray-400" : "text-primary"}`}>
+        <span className={`font-bold text-sm px-2 py-0.5 rounded ${isOutOfStock ? "bg-gray-200 text-gray-500" : "bg-black text-white"}`}>
           ${discountedPrice.toFixed(2)}
         </span>
         {hasDiscount && !isOutOfStock && (
@@ -612,11 +612,13 @@ function HatCard({ hat }: { hat: HatVariant }) {
         </p>
       )}
 
-      {/* Line total */}
+      {/* Line total - white text on dark */}
       {quantity > 0 && !isOutOfStock && (
-        <p className="text-[10px] text-green-600 font-medium mt-1.5 text-center">
-          = ${(discountedPrice * quantity).toFixed(2)}
-        </p>
+        <div className="mt-1.5 text-center">
+          <span className="text-[10px] font-medium bg-black text-white px-2 py-0.5 rounded inline-block">
+            = ${(discountedPrice * quantity).toFixed(2)}
+          </span>
+        </div>
       )}
     </div>
   );
@@ -719,7 +721,7 @@ function ModelSection({
           )}
           <div className="flex flex-col items-start gap-1">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-primary bg-primary/10 px-3 py-1 rounded">
+              <span className="text-sm font-bold text-black bg-yellow px-3 py-1 rounded">
                 {model}
               </span>
               <span className="text-xs text-gray-400">({variants.length} colors)</span>

@@ -24,11 +24,12 @@ export default function EmailSignupPopup() {
       if (daysSinceDismissed < 7) return;
     }
 
-    // Show after 5 seconds
+    // Show after 3 minutes
+    const threeMinutes = 3 * 60 * 1000;
     const timer = setTimeout(() => {
       setShowPopup(true);
       sessionStorage.setItem("emailPopupShown", "true");
-    }, 5000);
+    }, threeMinutes);
 
     return () => clearTimeout(timer);
   }, []);
