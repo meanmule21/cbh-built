@@ -41,8 +41,13 @@ if (-not (Test-Path "node_modules\next")) {
     Write-Host "Dependencies already installed" -ForegroundColor Green
 }
 
-Write-Host "`nStarting development server..." -ForegroundColor Cyan
-Write-Host "The site will be available at: http://localhost:3000" -ForegroundColor Green
+Write-Host "`nStarting development server (local network enabled)..." -ForegroundColor Cyan
+Write-Host "This computer: http://localhost:3000" -ForegroundColor Green
+# Show local IP so other devices can connect
+$localIp = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch "Loopback|Bluetooth" -and $_.IPAddress -notmatch "^169\.254" } | Select-Object -First 1).IPAddress
+if ($localIp) {
+    Write-Host "Other devices on your network: http://${localIp}:3000" -ForegroundColor Green
+}
 Write-Host "Press Ctrl+C to stop the server`n" -ForegroundColor Yellow
 
-npm run dev
+npm run dev:network
