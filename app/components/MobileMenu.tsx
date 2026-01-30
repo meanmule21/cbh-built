@@ -44,6 +44,13 @@ export default function MobileMenu() {
               FAQ
             </a>
             <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-accent transition-colors font-medium"
+            >
+              Contact Us
+            </Link>
+            <Link
               href="/reorder"
               onClick={() => setIsOpen(false)}
               className="px-4 py-3 text-white/90 hover:bg-white/10 hover:text-accent transition-colors font-medium"

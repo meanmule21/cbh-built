@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 // SEO Metadata
 export const metadata: Metadata = {
   title: {
-    default: "Custom Business Hats | Premium Embroidered Hats for Teams & Businesses",
-    template: "%s | Custom Business Hats",
+    default: "Mean Mule Apparel | Custom Embroidery, Hats & Apparel for Teams and Businesses",
+    template: "%s | Mean Mule Apparel",
   },
   description: "Order premium custom embroidered hats for your business, team, or event. Richardson, Yupoong, Flexfit & more. No minimums, free shipping on 24+ hats. Made in USA with 10-15 business day turnaround.",
   keywords: [
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://custombusinesshats.com",
     siteName: "Custom Business Hats",
-    title: "Custom Business Hats | Premium Embroidered Hats for Teams & Businesses",
+    title: "Mean Mule Apparel | Custom Embroidery, Hats & Apparel for Teams and Businesses",
     description: "Order premium custom embroidered hats for your business, team, or event. No minimums, free shipping on 24+ hats. Made in USA.",
     images: [
       {
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: "Custom Business Hats | Premium Embroidered Hats",
+    title: "Mean Mule Apparel | Custom Embroidery, Hats & Apparel",
     description: "Order premium custom embroidered hats. No minimums, free shipping on 24+ hats. Made in USA.",
     images: ["/mean-mule-logo.png"],
     creator: "@custombusinesshats",

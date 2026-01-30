@@ -1,6 +1,21 @@
 # Start Development Server Script
 # This script fixes proxy issues and starts the Next.js dev server
-# Run this in your own PowerShell terminal: .\start-dev-server.ps1
+#
+# IMPORTANT: Run this in Windows PowerShell or Terminal *outside Cursor*
+# (not in Cursor's integrated terminal). Then open http://localhost:3000
+# or http://127.0.0.1:3000 in your browser (use http, not https).
+#
+# Run from project folder:  cd "C:\Users\injec\Downloads\cbh-built-main"  then  .\start-dev-server.ps1
+# Or use full path:         & "C:\Users\injec\Downloads\cbh-built-main\start-dev-server.ps1"
+
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+if (-not (Test-Path (Join-Path $scriptDir "package.json"))) {
+    Write-Host "Error: package.json not found. Run this script from the project folder (cbh-built-main)." -ForegroundColor Red
+    Write-Host "  cd `"$scriptDir`"" -ForegroundColor Yellow
+    Write-Host "  .\start-dev-server.ps1" -ForegroundColor Yellow
+    exit 1
+}
+Set-Location $scriptDir
 
 Write-Host "Fixing proxy and npm configuration..." -ForegroundColor Yellow
 
@@ -41,13 +56,22 @@ if (-not (Test-Path "node_modules\next")) {
     Write-Host "Dependencies already installed" -ForegroundColor Green
 }
 
-Write-Host "`nStarting development server (local network enabled)..." -ForegroundColor Cyan
-Write-Host "This computer: http://localhost:3000" -ForegroundColor Green
+# Clear .next to avoid EPERM / "localhost won't show" (file locks, concurrent Next.js)
+if (Test-Path ".next") {
+    Write-Host "`nClearing .next cache (avoids EPERM / localhost issues)..." -ForegroundColor Cyan
+    Remove-Item -Recurse -Force ".next" -ErrorAction SilentlyContinue
+}
+
+Write-Host "`nStarting development server..." -ForegroundColor Cyan
+Write-Host "Open in browser (use http, not https):" -ForegroundColor Yellow
+Write-Host "  http://localhost:3000" -ForegroundColor Green
+Write-Host "  http://127.0.0.1:3000" -ForegroundColor Green
+Write-Host "If localhost won't load: close other npm run dev terminals, use 127.0.0.1 if localhost fails, or run this script from PowerShell *outside* Cursor." -ForegroundColor Gray
 # Show local IP so other devices can connect
 $localIp = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch "Loopback|Bluetooth" -and $_.IPAddress -notmatch "^169\.254" } | Select-Object -First 1).IPAddress
 if ($localIp) {
-    Write-Host "Other devices on your network: http://${localIp}:3000" -ForegroundColor Green
+    Write-Host "Other devices on your network: http://${localIp}:3000" -ForegroundColor Cyan
 }
-Write-Host "Press Ctrl+C to stop the server`n" -ForegroundColor Yellow
+Write-Host "`nPress Ctrl+C to stop the server`n" -ForegroundColor Yellow
 
-npm run dev:network
+npm run dev:local

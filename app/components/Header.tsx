@@ -20,6 +20,15 @@ export default function Header() {
           {/* Right side - Navigation + Cart */}
           <div className="flex items-center gap-2 sm:gap-4">
             <Link
+              href="/contact"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/90 hover:text-white hover:bg-white/10 transition-colors text-sm font-medium"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span className="hidden sm:inline">Contact Us</span>
+            </Link>
+            <Link
               href="/reorder"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/90 hover:text-white hover:bg-white/10 transition-colors text-sm font-medium"
             >

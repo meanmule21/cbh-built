@@ -22,7 +22,7 @@ export default function TermsOfServicePage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-primary mb-8">Terms of Service</h1>
+        <h1 className="text-3xl font-bold text-accent mb-8">Terms of Service</h1>
         
         <div className="prose prose-lg max-w-none space-y-6 text-text">
           <p className="text-gray-600">
@@ -35,7 +35,7 @@ export default function TermsOfServicePage() {
           </p>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">1. Order Acceptance</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">1. Order Acceptance</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>All orders are subject to acceptance and availability.</li>
               <li>We reserve the right to refuse or cancel any order for any reason.</li>
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">2. Artwork Requirements</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">2. Artwork Requirements</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>You must own or have legal rights to use any artwork, logos, or designs submitted.</li>
               <li>We accept vector files (AI, EPS, PDF) for best quality. High-resolution PNG/JPG files are also accepted.</li>
@@ -56,7 +56,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">3. Pricing & Payment</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">3. Pricing & Payment</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>All prices are in US Dollars (USD).</li>
               <li>Prices are subject to change without notice.</li>
@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">4. Production & Delivery</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">4. Production & Delivery</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>Standard production time is 10-15 business days after artwork approval.</li>
               <li>Rush orders may be available for an additional fee - contact us to inquire.</li>
@@ -78,7 +78,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">5. Quality Guarantee</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">5. Quality Guarantee</h2>
             <p>
               We stand behind the quality of our work. If you receive a defective product or your order 
               does not match the approved proof, we will:
@@ -93,7 +93,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">6. Returns & Cancellations</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">6. Returns & Cancellations</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Custom orders cannot be returned or refunded</strong> unless there is a manufacturing defect or error on our part.</li>
               <li>Orders may be cancelled within 24 hours of placement for a full refund, provided production has not begun.</li>
@@ -103,7 +103,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">7. Intellectual Property</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">7. Intellectual Property</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>You retain ownership of any artwork you provide.</li>
               <li>By submitting artwork, you grant us permission to use it for producing your order.</li>
@@ -113,7 +113,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">8. Limitation of Liability</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">8. Limitation of Liability</h2>
             <p>
               Custom Business Hats shall not be liable for any indirect, incidental, special, or consequential 
               damages arising from the use of our products or services. Our total liability shall not exceed 
@@ -122,7 +122,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">9. Dispute Resolution</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">9. Dispute Resolution</h2>
             <p>
               Any disputes arising from these terms or your order will be resolved through good-faith negotiation. 
               If a resolution cannot be reached, disputes will be subject to binding arbitration in accordance 
@@ -131,7 +131,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">10. Changes to Terms</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">10. Changes to Terms</h2>
             <p>
               We reserve the right to modify these Terms of Service at any time. Changes will be effective 
               immediately upon posting to this page. Your continued use of our services constitutes acceptance 
@@ -140,7 +140,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">11. Contact Us</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">11. Contact Us</h2>
             <p>
               If you have any questions about these Terms of Service, please contact us at:
             </p>

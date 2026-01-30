@@ -193,6 +193,12 @@ export default async function Home() {
               >
                 FAQ
               </a>
+              <Link 
+                href="/contact" 
+                className="text-white hover:text-yellow transition-colors"
+              >
+                Contact Us
+              </Link>
               <a 
                 href="/reorder" 
                 className="text-white hover:text-yellow transition-colors"

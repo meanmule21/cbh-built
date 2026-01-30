@@ -79,3 +79,26 @@ If the latest commit on GitHub is old, the push didn’t reach GitHub (e.g. wron
 | Not sure if it’s cache | **Redeploy** with cache disabled, then check the live URL in Incognito. |
 
 After a successful redeploy with cache cleared, the live site should match your GitHub `main` branch. If it still doesn’t, the next step is to share the exact Vercel deployment status (e.g. “last deployment: time, commit, Ready/Error”) and the exact URL you’re checking.
+
+---
+
+## 7. Contact Form (Production) – Environment Variables
+
+For the **Contact Us** form to send submissions to **sales@meanmuleapparel.com** on the live site, add these in Vercel:
+
+1. Vercel → your project **cbh-built** → **Settings** → **Environment Variables**.
+2. Add:
+
+   | Name | Value | Environment |
+   |------|--------|-------------|
+   | `RESEND_API_KEY` | Your Resend API key (e.g. `re_...`) | Production (and Preview if you want) |
+   | `CONTACT_FROM` | `Custom Business Hats <onboarding@resend.dev>` or your verified domain email | Production (and Preview if you want) |
+
+3. Save, then **Redeploy** the latest deployment (or push a new commit) so the new variables are used.
+
+**Optional (spam protection):** To enable reCAPTCHA on the contact form, add:
+
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` – your reCAPTCHA v2 site key  
+- `RECAPTCHA_SECRET_KEY` – your reCAPTCHA secret key  
+
+Do **not** commit API keys or secrets to the repo; keep them only in `.env.local` (local) and in Vercel Environment Variables (production).
