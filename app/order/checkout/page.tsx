@@ -88,7 +88,7 @@ export default function CheckoutPage() {
     <div className="max-w-3xl mx-auto pb-28">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-text mb-2">Checkout</h1>
-        <p className="text-gray-600">
+        <p className="text-white">
           Complete your order. You will be contacted to finalize payment and shipping details.
         </p>
       </div>
