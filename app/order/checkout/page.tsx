@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Button from "../../components/Button";
 import { useOrder, EXTRA_LOCATION_PRICE, ARTWORK_SETUP_FEE } from "../context/OrderContext";
 
 const frontLocationLabels: Record<string, string> = {
@@ -75,6 +74,8 @@ export default function CheckoutPage() {
       // Redirect to Stripe Checkout
       if (data.url) {
         window.location.href = data.url;
+      } else {
+        throw new Error("No checkout URL received. Please try again.");
       }
     } catch (err: any) {
       setError(err.message || "Something went wrong. Please try again.");
@@ -241,14 +242,14 @@ export default function CheckoutPage() {
               Review your order details above. Click below to proceed to secure checkout with Stripe.
             </p>
 
-            <Button 
-              onClick={handleSubmitOrder} 
-              fullWidth 
-              className="text-lg py-4"
+            <button
+              type="button"
+              onClick={handleSubmitOrder}
               disabled={cartItems.length === 0 || isProcessing}
+              className="w-full inline-flex items-center justify-center gap-2 font-semibold rounded-lg px-6 py-4 text-lg bg-accent hover:bg-accent-dark text-black shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
             >
               {isProcessing ? "Processing..." : `Pay Now - $${orderTotal.toFixed(2)}`}
-            </Button>
+            </button>
 
             <div className="flex items-center justify-center gap-2 mt-3">
               <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
