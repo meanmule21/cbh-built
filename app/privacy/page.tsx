@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold text-primary mb-8">Privacy Policy</h1>
+        <h1 className="text-3xl font-bold text-accent mb-8">Privacy Policy</h1>
         
         <div className="prose prose-lg max-w-none space-y-6 text-text">
           <p className="text-gray-600">
@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">1. Information We Collect</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">1. Information We Collect</h2>
             <p>
               When you place an order with Custom Business Hats, we collect the following information:
             </p>
@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">2. How We Use Your Information</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">2. How We Use Your Information</h2>
             <p>We use your information to:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Process and fulfill your orders</li>
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">3. Information Sharing</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">3. Information Sharing</h2>
             <p>
               We do not sell, trade, or rent your personal information to third parties. We may share your information with:
             </p>
@@ -68,7 +68,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">4. Data Security</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">4. Data Security</h2>
             <p>
               We implement appropriate security measures to protect your personal information:
             </p>
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">5. Cookies</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">5. Cookies</h2>
             <p>
               Our website uses cookies to enhance your browsing experience. Cookies help us:
             </p>
@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">6. Your Rights</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">6. Your Rights</h2>
             <p>You have the right to:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Access the personal information we hold about you</li>
@@ -107,7 +107,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">7. Data Retention</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">7. Data Retention</h2>
             <p>
               We retain your personal information for as long as necessary to fulfill the purposes outlined in this policy, 
               comply with legal obligations, resolve disputes, and enforce our agreements. Order records are typically 
@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">8. Children&apos;s Privacy</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">8. Children&apos;s Privacy</h2>
             <p>
               Our services are not directed to children under 13 years of age. We do not knowingly collect personal 
               information from children under 13.
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">9. Changes to This Policy</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">9. Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. We will notify you of any changes by posting the 
               new Privacy Policy on this page and updating the &quot;Last Updated&quot; date.
@@ -132,7 +132,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-primary mt-8 mb-4">10. Contact Us</h2>
+            <h2 className="text-xl font-semibold text-accent mt-8 mb-4">10. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please contact us at:
             </p>
