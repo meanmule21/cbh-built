@@ -78,7 +78,7 @@ export default function SuccessContent() {
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-white/70">Email:</span>
-              <span className="text-white">{orderData.customer_email}</span>
+              <span className="text-white">{orderData?.customer_email ?? "—"}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-white/70">Payment Status:</span>

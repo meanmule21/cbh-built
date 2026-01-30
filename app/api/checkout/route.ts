@@ -12,6 +12,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
     }
 
+    const totalHats = cartItems.reduce((sum: number, item: any) => sum + (item.quantity || 0), 0);
+
+    // Stripe minimum is 50 cents per line item (USD)
+    const toCents = (d: number) => Math.max(50, Math.round(d * 100));
+
     // Create line items for Stripe
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = cartItems.map((item: any) => ({
       price_data: {
@@ -20,43 +25,43 @@ export async function POST(request: NextRequest) {
           name: item.name,
           description: `Custom embroidered hat - ${item.quantity} units`,
         },
-        unit_amount: Math.round((item.unitPrice - (totals.discountPerHat || 0)) * 100), // Convert to cents
+        unit_amount: toCents((item.unitPrice || 0) - (totals?.discountPerHat || 0)),
       },
       quantity: item.quantity,
     }));
 
     // Add 3D Puff embroidery if applicable
-    if (totals.puffEmbroideryTotal > 0) {
+    if (totals?.puffEmbroideryTotal > 0) {
       lineItems.push({
         price_data: {
           currency: "usd",
           product_data: {
             name: "3D Puff Embroidery",
-            description: `Premium 3D puff embroidery for ${totals.totalHats} hats`,
+            description: `Premium 3D puff embroidery for ${totalHats} hats`,
           },
-          unit_amount: Math.round(totals.puffEmbroideryTotal * 100),
+          unit_amount: toCents(totals.puffEmbroideryTotal),
         },
         quantity: 1,
       });
     }
 
     // Add extra embroidery locations if applicable
-    if (totals.extraEmbroideryTotal > 0) {
+    if (totals?.extraEmbroideryTotal > 0) {
       lineItems.push({
         price_data: {
           currency: "usd",
           product_data: {
             name: "Extra Embroidery Locations",
-            description: `${embroideryOptions.extraLocations.length} additional location(s)`,
+            description: `${(embroideryOptions?.extraLocations || []).length} additional location(s)`,
           },
-          unit_amount: Math.round(totals.extraEmbroideryTotal * 100),
+          unit_amount: toCents(totals.extraEmbroideryTotal),
         },
         quantity: 1,
       });
     }
 
     // Add artwork setup fee if not waived
-    if (totals.artworkSetupFee > 0 && !totals.artworkSetupWaived) {
+    if (totals?.artworkSetupFee > 0 && !totals?.artworkSetupWaived) {
       lineItems.push({
         price_data: {
           currency: "usd",
@@ -64,7 +69,7 @@ export async function POST(request: NextRequest) {
             name: "Artwork Setup Fee",
             description: "One-time artwork digitization and setup",
           },
-          unit_amount: Math.round(totals.artworkSetupFee * 100),
+          unit_amount: toCents(totals.artworkSetupFee),
         },
         quantity: 1,
       });
@@ -72,21 +77,27 @@ export async function POST(request: NextRequest) {
 
     // Apply rewards discount if applicable
     const discounts: Stripe.Checkout.SessionCreateParams.Discount[] = [];
-    if (totals.rewardsDiscount > 0) {
-      // Create a coupon for the rewards discount
-      const coupon = await stripe.coupons.create({
-        amount_off: Math.round(totals.rewardsDiscount * 100),
-        currency: "usd",
-        duration: "once",
-        name: `Rewards Cash (${totals.rewardsDiscountPercent}%)`,
-      });
-      discounts.push({ coupon: coupon.id });
+    if (totals?.rewardsDiscount > 0) {
+      try {
+        const coupon = await stripe.coupons.create({
+          amount_off: Math.round(totals.rewardsDiscount * 100),
+          currency: "usd",
+          duration: "once",
+          name: `Rewards Cash (${totals.rewardsDiscountPercent ?? 0}%)`,
+        });
+        discounts.push({ coupon: coupon.id });
+      } catch (e) {
+        console.warn("Could not create rewards coupon, continuing without:", e);
+      }
     }
 
     // Get the base URL for redirects
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
                     request.headers.get("origin") || 
                     "http://localhost:3000";
+
+    // customer_email optional (guest checkout when customerInfo is null)
+    const customerEmail = customerInfo?.email?.trim() || undefined;
 
     // Create Stripe Checkout session
     const session = await stripe.checkout.sessions.create({
@@ -96,18 +107,18 @@ export async function POST(request: NextRequest) {
       mode: "payment",
       success_url: `${baseUrl}/order/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/order/checkout`,
-      customer_email: customerInfo.email,
+      ...(customerEmail ? { customer_email: customerEmail } : {}),
       metadata: {
-        customerName: customerInfo.name,
-        customerEmail: customerInfo.email,
-        customerPhone: customerInfo.phone || "",
-        shippingAddress: customerInfo.shippingAddress || "",
-        embroideryType: embroideryOptions.type,
-        frontLocation: embroideryOptions.frontLocation,
-        extraLocations: embroideryOptions.extraLocations.join(", "),
+        customerName: (customerInfo as any)?.name ?? "",
+        customerEmail: customerEmail ?? "",
+        customerPhone: (customerInfo as any)?.phone ?? "",
+        shippingAddress: (customerInfo as any)?.shippingAddress ?? "",
+        embroideryType: embroideryOptions?.type ?? "standard",
+        frontLocation: embroideryOptions?.frontLocation ?? "front-center",
+        extraLocations: (embroideryOptions?.extraLocations || []).join(", "),
         artworkFileName: artworkFileName || "",
         specialInstructions: specialInstructions || "",
-        totalHats: totals.totalHats?.toString() || "0",
+        totalHats: String(totalHats),
       },
       shipping_address_collection: {
         allowed_countries: ["US"],

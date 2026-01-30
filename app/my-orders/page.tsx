@@ -203,7 +203,7 @@ export default function MyOrdersPage() {
                   <div>
                     <p className="text-sm opacity-90">Welcome back!</p>
                     <p className="text-2xl font-bold">{customer.reward_tier} Member</p>
-                    <p className="text-sm opacity-75">{customer.email}</p>
+                    <p className="text-sm opacity-75">{customer?.email ?? ""}</p>
                   </div>
                 </div>
               </div>
@@ -341,7 +341,7 @@ export default function MyOrdersPage() {
                   : "Start your next order today!"
                 }
               </p>
-              <Link href={`/order/hats?email=${encodeURIComponent(customer.email)}`}>
+              <Link href={`/order/hats?email=${encodeURIComponent(customer?.email ?? "")}`}>
                 <Button className="bg-white text-primary hover:bg-gray-100">
                   Start New Order
                 </Button>

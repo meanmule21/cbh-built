@@ -21,7 +21,7 @@ export default function OrderLayout({
 }) {
   return (
     <OrderProvider>
-      <div className="min-h-screen bg-background text-text flex flex-col">
+      <div className="min-h-screen bg-background text-text flex flex-col pointer-events-auto">
         {/* Trust Bar */}
         <TrustBar />
 
@@ -35,8 +35,8 @@ export default function OrderLayout({
           </div>
         </div>
 
-        {/* Main Content */}
-        <main className="flex-1 max-w-5xl mx-auto px-4 py-8 w-full">
+        {/* Main Content - explicit stacking so nothing blocks clicks */}
+        <main className="flex-1 max-w-5xl mx-auto px-4 py-8 w-full relative z-10 pointer-events-auto">
           {children}
         </main>
 

@@ -86,7 +86,7 @@ export default function CheckoutPage() {
   const totalSavings = volumeDiscount + (artworkSetupWaived ? ARTWORK_SETUP_FEE : 0) + rewardsDiscount;
 
   return (
-    <div className="max-w-3xl mx-auto pb-28">
+    <div className="max-w-3xl mx-auto pb-28 relative z-10 pointer-events-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-text mb-2">Checkout</h1>
         <p className="text-white">
@@ -245,8 +245,8 @@ export default function CheckoutPage() {
             <button
               type="button"
               onClick={handleSubmitOrder}
-              disabled={cartItems.length === 0 || isProcessing}
-              className="w-full inline-flex items-center justify-center gap-2 font-semibold rounded-lg px-6 py-4 text-lg bg-accent hover:bg-accent-dark text-black shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
+              disabled={isProcessing}
+              className="relative z-20 w-full inline-flex items-center justify-center gap-2 font-semibold rounded-lg px-6 py-4 text-lg bg-accent hover:bg-accent-dark text-black shadow-lg hover:shadow-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isProcessing ? "Processing..." : `Pay Now - $${orderTotal.toFixed(2)}`}
             </button>
@@ -266,7 +266,7 @@ export default function CheckoutPage() {
         <div className="pt-4">
           <Link
             href="/order/review"
-            className="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors"
+            className="relative z-20 inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors cursor-pointer"
           >
             <svg
               className="w-5 h-5"
