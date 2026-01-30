@@ -215,7 +215,7 @@ export default function CheckoutPage() {
             <div className="border-t border-gray-200 mt-4 pt-4">
               <div className="flex justify-between items-center">
                 <span className="text-xl font-bold text-text">Total</span>
-                <span className="text-2xl font-bold text-primary">${orderTotal.toFixed(2)}</span>
+                <span className="text-2xl font-bold text-white">${orderTotal.toFixed(2)}</span>
               </div>
               {totalSavings > 0 && (
                 <p className="text-sm text-green-600 text-right mt-1">
