@@ -98,7 +98,7 @@ export default function ArtworkPage() {
     <div className="max-w-3xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-text mb-2">Artwork & Embroidery</h1>
-        <p className="text-gray-600">
+        <p className="text-white">
           Configure your embroidery options and upload your logo or artwork.
         </p>
       </div>
@@ -304,8 +304,8 @@ export default function ArtworkPage() {
         </div>
 
         {/* Artwork Rights Confirmation */}
-        <div className={`bg-white rounded-xl shadow-sm border p-6 ${!hasArtworkRights ? 'border-pink/50' : 'border-gray-100'}`}>
-          <h2 className="text-lg font-semibold text-text mb-4">
+        <div className={`bg-black rounded-xl shadow-sm border border-yellow/30 p-6 ${!hasArtworkRights ? 'border-pink/50' : ''}`}>
+          <h2 className="text-lg font-semibold text-white mb-4">
             Artwork Rights <span className="text-pink">*</span>
           </h2>
           <label className="flex items-start gap-3 cursor-pointer">
@@ -313,9 +313,9 @@ export default function ArtworkPage() {
               type="checkbox"
               checked={embroideryOptions.artworkRightsConfirmed}
               onChange={(e) => handleArtworkRightsChange(e.target.checked)}
-              className="mt-1 w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary"
+              className="mt-1 w-5 h-5 text-accent border-gray-400 rounded focus:ring-accent"
             />
-            <span className="text-gray-700">
+            <span className="text-white">
               I own or have the rights to use this artwork for embroidery purposes.
             </span>
           </label>
