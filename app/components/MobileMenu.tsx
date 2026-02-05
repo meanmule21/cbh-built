@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   return (
     <div className="md:hidden">
@@ -36,6 +37,23 @@ export default function MobileMenu() {
             >
               About Us
             </a>
+            <button
+              type="button"
+              onClick={() => setProductsOpen((o) => !o)}
+              className="flex items-center justify-between px-4 py-3 text-white/90 hover:bg-white/10 hover:text-accent transition-colors font-medium text-left w-full"
+            >
+              Our Products
+              <svg className={`w-4 h-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {productsOpen && (
+              <div className="pl-6 pb-2 flex flex-col gap-0.5">
+                <Link href="/products/hats" onClick={() => setIsOpen(false)} className="px-4 py-2 text-white/80 hover:text-accent text-sm">Hats</Link>
+                <Link href="/products/shirts" onClick={() => setIsOpen(false)} className="px-4 py-2 text-white/80 hover:text-accent text-sm">Shirts</Link>
+                <Link href="/products/hoodies" onClick={() => setIsOpen(false)} className="px-4 py-2 text-white/80 hover:text-accent text-sm">Hoodies</Link>
+              </div>
+            )}
             <a
               href="#faq"
               onClick={() => setIsOpen(false)}

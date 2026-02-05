@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import CartIconButton from "./CartIconButton";
+import ProductsNavDropdown from "./ProductsNavDropdown";
 
 export default function Header() {
   return (
@@ -19,6 +20,7 @@ export default function Header() {
 
           {/* Right side - Navigation + Cart */}
           <div className="flex items-center gap-2 sm:gap-4">
+            <ProductsNavDropdown variant="header" />
             <Link
               href="/contact"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white/90 hover:text-white hover:bg-white/10 transition-colors text-sm font-medium"

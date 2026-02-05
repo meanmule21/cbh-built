@@ -6,6 +6,7 @@ import TestimonialCard from "./components/TestimonialCard";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 import FamilyPhoto from "./components/FamilyPhoto";
 import MobileMenu from "./components/MobileMenu";
+import ProductsNavDropdown from "./components/ProductsNavDropdown";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import EmailSignupPopup from "./components/EmailSignupPopup";
 // Default counters (will be replaced with Drupal data)
@@ -187,6 +188,7 @@ export default async function Home() {
               >
                 About Us
               </a>
+              <ProductsNavDropdown variant="homepage" />
               <a 
                 href="#faq" 
                 className="text-white hover:text-yellow transition-colors"

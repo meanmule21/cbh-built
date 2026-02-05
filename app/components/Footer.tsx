@@ -34,6 +34,21 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/products/hats" className="text-white/70 hover:text-accent transition-colors">
+                  Hats
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/shirts" className="text-white/70 hover:text-accent transition-colors">
+                  Shirts
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/hoodies" className="text-white/70 hover:text-accent transition-colors">
+                  Hoodies
+                </Link>
+              </li>
+              <li>
                 <Link href="/order/hats" className="text-white/70 hover:text-accent transition-colors">
                   Start New Order
                 </Link>
