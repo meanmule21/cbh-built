@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getHatById } from "../data";
-import AddToCartButton from "../AddToCartButton";
+import AddToCartButton from "@/app/products/AddToCartButton";
 
 export default async function HatProductPage({
   params,
