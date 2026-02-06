@@ -9,6 +9,13 @@ export const metadata: Metadata = {
 
 // Placeholder products — replace with your real product data or API
 const PLACEHOLDER_HATS: ProductCardData[] = [
+  {
+    id: "injected-camo-trucker",
+    name: "Injected Motorsports Old School Camo Duck Trucker Hat",
+    price: 29.99,
+    image: "/products/hats/injected-camo-trucker-hat.png",
+    reviewCount: 0,
+  },
   { id: "1", name: "Mean Mule Trucker Hat", price: 24.99, image: "/mean-mule-logo.png", reviewCount: 12 },
   { id: "2", name: "Classic Snapback Cap", price: 22.99, image: "/mean-mule-logo.png", reviewCount: 8 },
   { id: "3", name: "Structured Dad Cap", price: 26.99, image: "/mean-mule-logo.png", reviewCount: 15 },
