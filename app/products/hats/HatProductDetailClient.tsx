@@ -41,13 +41,6 @@ export default function HatProductDetailClient({ product }: { product: Product }
 
   return (
     <div>
-      <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
-        {product.name}
-      </h1>
-      <p className="text-xl font-bold text-accent mb-6">
-        ${product.price.toFixed(2)}
-      </p>
-
       <AddToCartButton
         product={{ id: product.id, name: product.name, price: product.price, image: product.image }}
         category="hats"

@@ -34,7 +34,25 @@ export default async function HatProductPage({
           />
         </div>
 
-        <HatProductDetailClient product={product} />
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
+            {product.name}
+          </h1>
+          <p className="text-xl font-bold text-accent mb-6">
+            ${product.price.toFixed(2)}
+          </p>
+          {/* Always-visible fallback so Add to cart shows even before JS */}
+          <div className="mb-6 p-4 rounded-xl border-2 border-accent bg-accent/10">
+            <p className="text-white font-semibold mb-2">Add to cart</p>
+            <a
+              href="/products/cart"
+              className="inline-block px-6 py-3 rounded-lg bg-accent text-black font-bold hover:bg-accent-dark transition-colors"
+            >
+              View cart / Checkout
+            </a>
+          </div>
+          <HatProductDetailClient product={product} />
+        </div>
       </div>
     </div>
   );
