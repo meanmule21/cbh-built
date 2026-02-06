@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import CartIconButton from "./CartIconButton";
+import ProductsCartIcon from "./ProductsCartIcon";
 import ProductsNavDropdown from "./ProductsNavDropdown";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isProductsSection = pathname?.startsWith("/products") ?? false;
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-lg">
       {/* Main navigation */}
@@ -48,7 +52,7 @@ export default function Header() {
               </svg>
               <span className="hidden sm:inline">New Order</span>
             </Link>
-            <CartIconButton />
+            {isProductsSection ? <ProductsCartIcon /> : <CartIconButton />}
           </div>
         </div>
       </div>

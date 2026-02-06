@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getHatById } from "../data";
+import AddToCartButton from "../AddToCartButton";
 
 export default async function HatProductPage({
   params,
@@ -44,6 +45,11 @@ export default async function HatProductPage({
           <p className="text-xl font-bold text-accent mb-6">
             ${product.price.toFixed(2)}
           </p>
+
+          <AddToCartButton
+            product={{ id: product.id, name: product.name, price: product.price, image: product.image }}
+            category="hats"
+          />
 
           {product.description ? (
             <div className="text-white/90 space-y-4 prose prose-invert prose-p:text-white/90 prose-li:text-white/90 prose-strong:text-white max-w-none">
