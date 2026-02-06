@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ProductCard, { type ProductCardData } from "./ProductCard";
+import ProductCardWithAdd from "./ProductCardWithAdd";
+import { type ProductCardData } from "./ProductCard";
 
 type SortOption = "best-selling" | "price-low" | "price-high" | "name-az" | "name-za";
 
@@ -113,7 +114,7 @@ export default function CollectionPage({
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {sorted.map((product) => (
-              <ProductCard key={product.id} product={product} category={category} />
+              <ProductCardWithAdd key={product.id} product={product} category={category} />
             ))}
           </div>
         </div>
