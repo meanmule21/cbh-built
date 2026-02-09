@@ -1,15 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useProductsCart, type ProductsCartContextType } from "../../context/ProductsCartContext";
+import { useProductsCart } from "../../context/ProductsCartContext";
 
-export default function ProductsCartPage() {
+function ProductsCartContent() {
   const searchParams = useSearchParams();
-  const { items, addItem, updateQuantity, removeItem, orderTotal, totalCount } =
-    useProductsCart() as ProductsCartContextType;
+  const cart = useProductsCart();
+  const items = cart?.items ?? [];
+  const addItem = cart?.addItem ?? (() => {});
+  const updateQuantity = cart?.updateQuantity ?? (() => {});
+  const removeItem = cart?.removeItem ?? (() => {});
+  const orderTotal = cart?.orderTotal ?? 0;
+  const totalCount = cart?.totalCount ?? 0;
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [error, setError] = useState("");
 
@@ -183,5 +188,13 @@ export default function ProductsCartPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function ProductsCartPage() {
+  return (
+    <Suspense fallback={<div className="max-w-4xl mx-auto px-4 py-8 text-white">Loading cart…</div>}>
+      <ProductsCartContent />
+    </Suspense>
   );
 }
