@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import AddToCartBar from "./AddToCartBar";
 
 export const metadata: Metadata = {
   title: "Our Products",
@@ -16,7 +15,6 @@ export default function ProductsLayout({
   return (
     <div className="min-h-screen bg-background text-text flex flex-col">
       <Header />
-      <AddToCartBar />
       <main className="flex-1 w-full">{children}</main>
       <Footer />
     </div>

@@ -16,24 +16,14 @@ export default async function HatProductPage({
   const product = getHatById(id);
   if (!product) notFound();
 
-  const addToCartHref = `/products/cart?add=${encodeURIComponent(product.id)}&name=${encodeURIComponent(product.name)}&price=${product.price}&image=${encodeURIComponent(product.image)}&category=hats&qty=1`;
-
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Link
         href="/products/hats"
-        className="inline-flex items-center gap-1 text-white/70 hover:text-accent text-sm mb-4"
+        className="inline-flex items-center gap-1 text-white/70 hover:text-accent text-sm mb-8"
       >
         ← Back to Hats
       </Link>
-
-      {/* Add to cart bar at top of page — always visible, no grid dependency */}
-      <a
-        href={addToCartHref}
-        className="mb-8 w-full block text-center py-4 px-6 rounded-xl bg-accent text-black font-bold text-xl hover:bg-accent-dark transition-colors shadow-lg border-2 border-accent"
-      >
-        Add to cart — ${product.price.toFixed(2)}
-      </a>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         <div className="relative aspect-square rounded-xl overflow-hidden bg-dark-grey-light">

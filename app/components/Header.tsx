@@ -52,16 +52,6 @@ export default function Header() {
               </svg>
               <span className="hidden sm:inline">New Order</span>
             </Link>
-            {pathname === "/products/hats/injected-camo-trucker" && (
-              <Link
-                href="/products/cart?add=injected-camo-trucker&name=Injected%20Motorsports%20Old%20School%20Camo%20Duck%20Trucker%20Hat&price=29.99&image=%2Fproducts%2Fhats%2Finjected-camo-trucker-hat.png&category=hats&qty=1"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold text-sm transition-colors"
-              >
-                <span className="hidden sm:inline">Add to cart</span>
-                <span className="sm:hidden">Cart</span>
-                <span className="text-xs">$29.99</span>
-              </Link>
-            )}
             {isProductsSection ? <ProductsCartIcon /> : <CartIconButton />}
           </div>
         </div>
