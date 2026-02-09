@@ -39,7 +39,7 @@ function saveCart(items: ProductsCartItem[]) {
   } catch {}
 }
 
-type ProductsCartContextType = {
+export type ProductsCartContextType = {
   items: ProductsCartItem[];
   addItem: (item: Omit<ProductsCartItem, "quantity"> & { quantity?: number }) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -116,7 +116,10 @@ export function ProductsCartProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useProductsCart() {
+export function useProductsCart(): ProductsCartContextType {
   const ctx = useContext(ProductsCartContext);
-  return ctx;
+  if (ctx === undefined) {
+    throw new Error("useProductsCart must be used within ProductsCartProvider");
+  }
+  return ctx as ProductsCartContextType;
 }

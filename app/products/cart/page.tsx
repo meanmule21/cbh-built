@@ -4,11 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useProductsCart } from "../../context/ProductsCartContext";
+import { useProductsCart, type ProductsCartContextType } from "../../context/ProductsCartContext";
 
 export default function ProductsCartPage() {
   const searchParams = useSearchParams();
-  const { items, addItem, updateQuantity, removeItem, orderTotal, totalCount } = useProductsCart();
+  const { items, addItem, updateQuantity, removeItem, orderTotal, totalCount } =
+    useProductsCart() as ProductsCartContextType;
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [error, setError] = useState("");
 
@@ -68,7 +69,6 @@ export default function ProductsCartPage() {
             artworkSetupWaivedReason: null,
             rewardsDiscount: 0,
             rewardsDiscountPercent: 0,
-            discountPerHat: 0,
           },
           artworkFileName: "",
           specialInstructions: "",
