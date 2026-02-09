@@ -1,14 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useProductsCart } from "../../context/ProductsCartContext";
 
 export default function ProductsCartPage() {
-  const { items, updateQuantity, removeItem, orderTotal, totalCount } = useProductsCart();
+  const searchParams = useSearchParams();
+  const { items, addItem, updateQuantity, removeItem, orderTotal, totalCount } = useProductsCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [error, setError] = useState("");
+
+  const addedFromUrl = useRef(false);
+  // Add item when arriving from product page "Add to cart" link (?add=id&name=...&price=...&image=...&category=...&qty=...)
+  useEffect(() => {
+    const add = searchParams.get("add");
+    if (!add || !addItem || addedFromUrl.current) return;
+    const name = searchParams.get("name");
+    const price = searchParams.get("price");
+    const image = searchParams.get("image");
+    const category = searchParams.get("category");
+    const qty = Math.max(1, parseInt(searchParams.get("qty") || "1", 10));
+    if (name && price && image && category) {
+      addedFromUrl.current = true;
+      addItem({
+        id: add,
+        name: decodeURIComponent(name),
+        unitPrice: parseFloat(price),
+        image: decodeURIComponent(image),
+        category: category as "hats" | "shirts" | "hoodies",
+        quantity: qty,
+      });
+      window.history.replaceState({}, "", "/products/cart");
+    }
+  }, [searchParams, addItem]);
 
   const handleCheckout = async () => {
     if (items.length === 0) return;

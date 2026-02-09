@@ -34,23 +34,25 @@ export default async function HatProductPage({
           />
         </div>
 
-        <div>
+        <div className="flex flex-col">
+          {/* Add to cart FIRST so it’s always visible above the fold — plain HTML, no JS */}
+          <a
+            href={`/products/cart?add=${encodeURIComponent(product.id)}&name=${encodeURIComponent(product.name)}&price=${product.price}&image=${encodeURIComponent(product.image)}&category=hats&qty=1`}
+            className="w-full block text-center py-4 px-6 rounded-xl bg-accent text-black font-bold text-xl hover:bg-accent-dark transition-colors shadow-lg border-2 border-accent mb-6"
+            style={{ display: "block", minHeight: "56px" }}
+          >
+            Add to cart — ${product.price.toFixed(2)}
+          </a>
+          <a href="/products/cart" className="text-white/90 hover:text-accent text-sm font-medium underline mb-6 block">
+            View cart
+          </a>
+
           <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
             {product.name}
           </h1>
           <p className="text-xl font-bold text-accent mb-6">
             ${product.price.toFixed(2)}
           </p>
-          {/* Always-visible fallback so Add to cart shows even before JS */}
-          <div className="mb-6 p-4 rounded-xl border-2 border-accent bg-accent/10">
-            <p className="text-white font-semibold mb-2">Add to cart</p>
-            <a
-              href="/products/cart"
-              className="inline-block px-6 py-3 rounded-lg bg-accent text-black font-bold hover:bg-accent-dark transition-colors"
-            >
-              View cart / Checkout
-            </a>
-          </div>
           <HatProductDetailClient product={product} />
         </div>
       </div>
