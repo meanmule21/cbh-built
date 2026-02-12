@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   try {
     if (!RESEND_API_KEY) {
       return NextResponse.json(
-        { error: "Contact form is not configured. Missing RESEND_API_KEY." },
+        { error: "Unable to send: contact form is not configured. Please email us at sales@meanmuleapparel.com." },
         { status: 503 }
       );
     }
@@ -115,18 +115,25 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json(
-        { error: "Failed to send message. Please try again or email us directly." },
-        { status: 500 }
-      );
+      const err = error as { message?: string; name?: string };
+      const errMsg = typeof err?.message === "string" ? err.message.trim() : "";
+      const displayMsg = errMsg
+        ? `Unable to send: ${errMsg}`
+        : "Unable to send. Please try again or email us at sales@meanmuleapparel.com.";
+      console.error("Resend error:", err?.name ?? "Error", errMsg || JSON.stringify(error));
+      return NextResponse.json({ error: displayMsg }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, id: data?.id });
   } catch (e) {
     console.error("Contact API error:", e);
+    const msg = e instanceof Error ? e.message : "";
     return NextResponse.json(
-      { error: "Something went wrong. Please try again later." },
+      {
+        error: msg
+          ? `Unable to send: ${msg}`
+          : "Unable to send. Please try again or email us at sales@meanmuleapparel.com.",
+      },
       { status: 500 }
     );
   }

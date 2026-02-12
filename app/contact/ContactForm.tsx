@@ -108,10 +108,18 @@ export default function ContactForm() {
         method: "POST",
         body: formData,
       });
-      const json = (await res.json()) as { error?: string; success?: boolean };
+      let json: { error?: string; success?: boolean };
+      try {
+        json = (await res.json()) as { error?: string; success?: boolean };
+      } catch {
+        setError("Unable to send. Please try again or email us at sales@meanmuleapparel.com.");
+        resetRecaptcha();
+        setLoading(false);
+        return;
+      }
 
       if (!res.ok) {
-        setError(json.error || "Something went wrong. Please try again.");
+        setError(json.error || "Unable to send. Please try again or email us at sales@meanmuleapparel.com.");
         resetRecaptcha();
         return;
       }
@@ -125,7 +133,7 @@ export default function ContactForm() {
       setFiles([]);
       resetRecaptcha();
     } catch (err) {
-      setError("Network error. Please check your connection and try again.");
+      setError("Unable to send. Please check your connection and try again, or email us at sales@meanmuleapparel.com.");
       resetRecaptcha();
     } finally {
       setLoading(false);
